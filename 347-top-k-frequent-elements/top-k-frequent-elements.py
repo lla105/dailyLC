@@ -20,5 +20,6 @@ class Solution(object):
         print()
         for _ in range(k):
             _, num = heapq.heappop(heap)
+            print(_, num)
             res.append(num)
         return res
