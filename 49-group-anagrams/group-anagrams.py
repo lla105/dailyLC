@@ -4,13 +4,16 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        d = defaultdict(list)
-
+        d = {}
         for word in strs:
-            sortedWord = sorted(word)
-            sortedWord = ''.join(sortedWord)
-            d[sortedWord].append(word)
+            sorted_word = sorted(word)
+            # print(word, " ... ", sorted_word)
+            sorted_word = ''.join(sorted_word)
+            # print(sorted_word)
+            if (sorted_word not in d):
+                d[sorted_word] = [word]
+            else:
+                d[sorted_word].append(word)
 
-
-        print(list(d.values()))
-        return list(d.values())
+        # print(d.values())
+        return d.values()
