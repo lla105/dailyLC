@@ -4,9 +4,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        temp = Counter(nums)
-        print(temp)
-        for n,i in temp.items():
-            # print(n,i)
-            if i!=1:
+        tempset = set()
+        for n in nums:
+            if n in tempset:
                 return True
+            else:
+                tempset.add(n)
