@@ -11,9 +11,11 @@ class Solution:
         while len(heap) > k:
             heapq.heappop(heap)
 
-        return [num for (freq, num) in heap]
-        # answer = []
-        # for freq,num in heap :
-        #     answer.append(num)
+        # return [num for (freq, num) in heap]
 
-        # return answer
+
+        answer = []
+        for freq,num in heap :
+            answer.append(num)
+
+        return answer
