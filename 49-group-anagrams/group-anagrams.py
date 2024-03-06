@@ -4,16 +4,24 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        d = {}
-        for word in strs:
-            sorted_word = sorted(word)
-            # print(word, " ... ", sorted_word)
-            sorted_word = ''.join(sorted_word)
-            # print(sorted_word)
-            if (sorted_word not in d):
-                d[sorted_word] = [word]
-            else:
-                d[sorted_word].append(word)
+        if len(strs)<=0:
+            return [[""]]
 
-        # print(d.values())
-        return d.values()
+        if len(strs)==1:
+            return [strs]
+
+        dic = defaultdict(list)
+        for word in strs:
+            sword = sorted(word)
+            sword = ''.join(sword)
+            if sword in dic:
+                dic[sword].append(word)
+            else :
+                dic[sword] = [word]
+        answer = []
+        for key,value in dic.items():
+            # print(">>> ", value)
+            answer.append(value)
+
+        print(dic)
+        return answer
