@@ -7,19 +7,16 @@ class Solution(object):
         """
 
         dic = Counter(nums)
-        print(dic)
 
         dic2 = {}
         for i in range(len(nums) + 1):
             # print(i)
             dic2[i] = []
 
-        print(dic2)
 
         for v,i in dic.items():
             # print(v,i)
             dic2[i].append(v)
-        print("dic2: ", dic2)
 
         res = []
 
