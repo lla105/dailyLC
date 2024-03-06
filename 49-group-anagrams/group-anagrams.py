@@ -20,8 +20,6 @@ class Solution(object):
                 dic[sword] = [word]
         answer = []
         for key,value in dic.items():
-            # print(">>> ", value)
             answer.append(value)
 
-        print(dic)
         return answer
