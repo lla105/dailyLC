@@ -7,11 +7,20 @@ class Solution(object):
         """
         if len(s) != len(t):
             return False
+        sdic = {}
+        for char in s:
+            if char in sdic:
+                sdic[char] += 1
+            else:
+                sdic[char] = 1
+        # print(sdic)
 
-        ss = sorted(s)
-        tt = sorted(t)
+        for char in t:
+            if char in sdic:
+                sdic[char] -= 1
+                if sdic[char] <=0:
+                    sdic.pop(char)
+            else:
+                return False
 
-        if ss!=tt:
-            return False
-        else:
-            return True
+        return True
