@@ -10,7 +10,6 @@ class Solution:
                 else :
                     if cell != '.':
                         s.add(cell)
-        print("row is good")
 
         for i in range(9):
             s = set()
@@ -21,7 +20,6 @@ class Solution:
                 else :
                     if cell != '.':
                         s.add(cell)
-        print("col is good ")
 
         anchor = [(0,0), (0,3), (0,6),
                     (3,0), (3,3), (3,6),
