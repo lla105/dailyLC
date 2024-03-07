@@ -1,27 +1,26 @@
-class Solution(object):
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+class Solution:
+    def isValid(self, s: str) -> bool:
+        bracketsdic = {'(': ')',
+                        '{': '}',
+                        '[': ']'
+                        }
         stack = []
-
-        bdic = {")": "(", 
-                "}": "{",
-                "]": "["
-                }
         for b in s:
-            if b in bdic:
-                # is a closed bracket
-                if len(stack)!=0 and stack[-1] == bdic[b]:
-                    # is good. pop it off?
-                    stack.pop()
-                else:
-                    return False
-            # is a open bracket
-            else:
+            if b in bracketsdic:
+                # open bracket
                 stack.append(b)
+            else:
+                # close bracket
+                if len(stack) == 0:
+                    return False
+                else:
+                    prevbracket = stack.pop()
+                    print(f'{b} vs {bracketsdic[prevbracket]}')
+                    if b != bracketsdic[prevbracket]:
+                        return False
+                        
         if len(stack)==0:
             return True
         else:
             return False
+            
