@@ -5,7 +5,9 @@ class Solution:
         for i in range(len(s)):
             char = s[i]
             if char in lastseenmap:
-                curr = prev + ( i - lastseenmap[char])
+                x = prev + ( i + 1)
+                curr = x - (lastseenmap[char] +1)
+                # curr = prev + ( i - lastseenmap[char])
             else:
                 curr = prev + ( i + 1)
             res+=curr
@@ -29,7 +31,7 @@ class Solution:
 
 # observation1:
 # if char is seen before, new count = x - (last seen index) + 1
-# if char is not seen before, get x = (current index)+1 + previous
+# if char is not seen before, get x = (current index)+1 + previous total
 
 
 
