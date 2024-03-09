@@ -18,5 +18,5 @@ class Solution:
                 s.pop()
             s.append( [curday, curtemp])
 
-        print(f'{s} and {result}')
+        # print(f'{s} and {result}')
         return result
