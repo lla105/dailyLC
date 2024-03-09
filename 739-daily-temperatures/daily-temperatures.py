@@ -1,6 +1,6 @@
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        t = temperatures
+    def dailyTemperatures(self, t: List[int]) -> List[int]:
+        # t = temperatures
         length = len(t)
 
         result = [0]*length
