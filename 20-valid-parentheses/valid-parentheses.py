@@ -1,32 +1,26 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        bracketsdic = {'(': ')',
+                        '{': '}',
+                        '[': ']'
+                        }
         stack = []
-        length = len(s)
-
-        bdic = { ")":"(" , "]":"[", "}":"{"}
-        
-        for i in range(length):
-            char = s[i]
-            if char not in bdic:
-                # is open bracket
-                stack.append(char)
+        for b in s:
+            if b in bracketsdic:
+                # open bracket
+                stack.append(b)
             else:
-                #is closed bracket
-                if len(stack)==0:
-                    # stack empty, is false
+                # close bracket
+                if len(stack) == 0:
                     return False
                 else:
-                    #stack not empty, check last item
-                    if stack[-1]!=bdic[char]:
+                    prevbracket = stack.pop()
+                    print(f'{b} vs {bracketsdic[prevbracket]}')
+                    if b != bracketsdic[prevbracket]:
                         return False
-                    else:
-
-                        stack.pop()
-            # print(f'{stack}')
-                
+                        
         if len(stack)==0:
             return True
         else:
             return False
-
             
