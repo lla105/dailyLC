@@ -13,7 +13,7 @@ class Solution:
         #for loop from front to back
         for curday, curtemp in enumerate(t):
             # print(f'{curday}, {curtemp}')
-            print(f'curday) : {curday}')
+            # print(f'curday) : {curday}')
             while len(s)>0 and curtemp>s[-1][0] :
                 prevday = s[-1][1]
                 diffday = curday - prevday
