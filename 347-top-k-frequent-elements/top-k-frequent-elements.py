@@ -4,28 +4,22 @@ class Solution:
        # dictionary format : { value : frequency }
 
         if len(nums)==1:
-           return [nums[0]]
-           
-        dic1 = Counter(nums)
+            return [1]
 
+        # nums = [11,11,11,22,22,33,33]
+        dic = Counter(nums)
 
-        # from 0 to n, where n is len(nums)
-        length = len(nums)
-        result = []
-        count = 0
-        dic2 = {}
-        for i in range(length, -1,-1):
-            # print(f'index : {i}')
-            dic2[i] = []
+        fredic = {}
+        for freq in range(len(nums)+1):
+            fredic[freq] = []
 
-        for i,v in dic1.items():
-            # print(f'{i}, {v}')
-            dic2[v].append(i)
+        for v,i in dic.items():
+            fredic[i].append(v)
 
-        for i in range(length, -1,-1):
-            for j in dic2[i]:
-                if j in dic1:
-                    result.append(j)
-                    count += 1
-                    if count == k:
-                        return result
+        answer = []
+        for i in range(len(fredic)-1, -1, -1):
+            for number in fredic[i]:
+                answer.append(number)
+                k-=1
+                if k==0:
+                    return answer
