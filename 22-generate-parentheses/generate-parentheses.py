@@ -1,22 +1,29 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        stack = []
-        res = []
+        stack = [] # to keep track of each combination
+        result = [] #colletion of combinations of brackets
 
-        def backtrack(openN, closedN):
-            if openN == closedN == n:
-                res.append("".join(stack))
+        def backtrack(openbs, closebs) :
+            #a)
+            if openbs==closebs and closebs==n: 
+                print(f'appending stack: {stack}')
+                result.append(''.join(stack))
+                # stack=[]
                 return
-
-            if openN < n:
+            #b)
+            if openbs<n:
+                # can only have open bs next
                 stack.append("(")
-                backtrack(openN + 1, closedN)
+                backtrack(openbs+1, closebs)
                 stack.pop()
-
-            if closedN < openN:
+            #c)
+            if openbs>closebs:
+                # next can be open or close
                 stack.append(")")
-                backtrack(openN, closedN +1)
+                backtrack(openbs, closebs+1) 
                 stack.pop()
+            
+
 
         backtrack(0,0)
-        return res
+        return result
