@@ -7,7 +7,6 @@ class Solution:
            return [nums[0]]
            
         dic1 = Counter(nums)
-        print(f"dic1: {dic1}")
 
 
         # from 0 to n, where n is len(nums)
@@ -18,12 +17,10 @@ class Solution:
         for i in range(length, -1,-1):
             # print(f'index : {i}')
             dic2[i] = []
-        print(f"dic2 : {dic2}")
 
         for i,v in dic1.items():
             # print(f'{i}, {v}')
             dic2[v].append(i)
-        print(f"new dic2: {dic2}")
 
         for i in range(length, -1,-1):
             for j in dic2[i]:
