@@ -1,25 +1,23 @@
-class Solution(object):
-    def groupAnagrams(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: List[List[str]]
-        """
-        if len(strs)<=0:
-            return [[""]]
-
-        if len(strs)==1:
-            return [strs]
-
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # dic format : { 'ant' : ['nat', 'tan']}
+        # dic['abc'].append('acb')
+        # dic['abc'].append('abc')
+        # if 'abc' in dic:
+        #     print("yeaaaa")
         dic = defaultdict(list)
-        for word in strs:
-            sword = sorted(word)
-            sword = ''.join(sword)
-            if sword in dic:
-                dic[sword].append(word)
-            else :
-                dic[sword] = [word]
-        answer = []
-        for key,value in dic.items():
-            answer.append(value)
 
-        return answer
+        for i in range(len(strs)):
+            word = strs[i]
+            sortedword = ''.join(sorted(word))
+            if sortedword in dic:
+                dic[sortedword].append(word)
+            else:
+                dic[sortedword] = [word]
+        print("DIC TION ARY ;;:::: ", dic)
+        result = []
+        for i,v in dic.items():
+            # print(f"{i} , {v}")
+            result.append(v)
+        print(dic)
+        return result
