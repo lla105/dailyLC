@@ -1,31 +1,34 @@
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # nums = [11,11,11,22,22,22,33]
+       # dictionary format : { value : frequency }
+
         if len(nums)==1:
-            return [1]
+           return [nums[0]]
+           
+        dic1 = Counter(nums)
+        print(f"dic1: {dic1}")
 
-        # nums = [11,11,11,22,22,33,33]
-        dic = Counter(nums)
 
-        fredic = {}
-        for freq in range(len(nums)+1):
-            fredic[freq] = []
+        # from 0 to n, where n is len(nums)
+        length = len(nums)
+        result = []
+        count = 0
+        dic2 = {}
+        for i in range(length, -1,-1):
+            # print(f'index : {i}')
+            dic2[i] = []
+        print(f"dic2 : {dic2}")
 
-        for v,i in dic.items():
-            # print(v,i)
-            if i in fredic:
-                fredic[i].append(v)
+        for i,v in dic1.items():
+            # print(f'{i}, {v}')
+            dic2[v].append(i)
+        print(f"new dic2: {dic2}")
 
-        answer = []
-        for i in range(len(fredic)-1, -1, -1):
-            for number in fredic[i]:
-                answer.append(number)
-                k-=1
-                if k==0:
-                    return answer
-
-        
+        for i in range(length, -1,-1):
+            for j in dic2[i]:
+                if j in dic1:
+                    result.append(j)
+                    count += 1
+                    if count == k:
+                        return result
