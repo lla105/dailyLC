@@ -1,22 +1,18 @@
 class Solution:
-    def dailyTemperatures(self, t: List[int]) -> List[int]:
-        # t = temperatures
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        t = temperatures
         length = len(t)
 
-        result = [0]*length
-        #monotonic stack structure : [ {tempa:daya} , {tempb:dayb} , ....]
-        s = [ ]
+        result = [0]*length # format is : [ int, int , int ]
+        stack = [ ] # format is : [ [tempa,daya] , [tempb,dayb] , ..]
 
         for curday, curtemp in enumerate(t):
-            # print(f'{curday} : {curtemp}')
-            # if curday == 0:
-            #     # s.append({curday:curtemp})
-            #     s.append([curday, curtemp])
-            while len(s)!=0 and curtemp>s[-1][1]:
-                daydiff = abs(s[-1][0] - curday)
-                result[s[-1][0]] = daydiff
-                s.pop()
-            s.append( [curday, curtemp])
+            while len(stack)!=0 and curtemp>stack[-1][0]  :
+                daydiff = abs(curday - stack[-1][1])
+                print(f'>>> {stack[-1][1]}')
+                result[stack[-1][1]] = daydiff
+                stack.pop(-1)
 
-        # print(f'{s} and {result}')
+            stack.append([curtemp,curday])
+            
         return result
