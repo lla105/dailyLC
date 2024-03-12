@@ -1,8 +1,8 @@
 class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
         pairs = sorted(zip(position, speed), reverse=True)
-        print(f'target : {target}')
-        print(f'pairs : {pairs}')
+        # print(f'target : {target}')
+        # print(f'pairs : {pairs}')
 
         stack=[]
         for i in range(len(pairs)) :
