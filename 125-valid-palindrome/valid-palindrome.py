@@ -10,11 +10,11 @@ class Solution:
             elif char.isdigit():
                 word.append(''.join(char))
         word = ''.join(word)
-        print(f'{word}')
+        # print(f'{word}')
 
         for i in range(len(word)):
 
-            print(f'{i} : {word[i]} vs {word[-i-1]}')
+            # print(f'{i} : {word[i]} vs {word[-i-1]}')
 
             if word[i]!=word[-i-1]:
                 return False
