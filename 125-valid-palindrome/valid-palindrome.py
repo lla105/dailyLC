@@ -1,20 +1,22 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         length = len(s)
-        print(f'length : {length}')
-        ss = []
+        word = []
         for i in range(length):
-            if s[i].isalpha() or s[i].isdigit():
-                ss.append(s[i].lower())
-        ss = ''.join(ss)
-        print(f'ss : {ss}')
-        # s = ss
-        # print(f's  : {s}')
+            char = s[i]
+            if char.isalpha():
 
-        for i in range(len(ss)):
-            # if s[i].lower() != s[-1].lower():
-            print(f'{ss[i]} vs {ss[-i]}')
-            if ss[i] != ss[-i-1]:
+                word.append(''.join(char.lower()))
+            elif char.isdigit():
+                word.append(''.join(char))
+        word = ''.join(word)
+        print(f'{word}')
+
+        for i in range(len(word)):
+
+            print(f'{i} : {word[i]} vs {word[-i-1]}')
+
+            if word[i]!=word[-i-1]:
                 return False
 
         return True
