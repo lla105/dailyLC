@@ -4,13 +4,10 @@ class Solution:
         word = []
         for i in range(length):
             char = s[i]
-            if char.isalpha():
-
-                word.append(''.join(char.lower()))
-            elif char.isdigit():
-                word.append(''.join(char))
+            if char.isalpha() or char.isdigit():
+                word.append(char.lower())
         word = ''.join(word)
-        # print(f'{word}')
+        print(f'{word}')
 
         for i in range(len(word)):
 
