@@ -1,19 +1,22 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        # print(f'{height}')
+        # print(height)
         maxArea = 0
         left = 0
-        right = len(height)-1
+        right = len(height) - 1
 
-        while left<right:
-            #pick the shorter bar
-            h = min(height[left], height[right])
-            currArea = h * (right-left)
-            maxArea = max(maxArea, currArea)
+        while left < right: 
+            print(f'left: {left}')
+            lefth = height[left]
+            righth = height[right]
 
-            #remember to append left or right
-            if height[left] > height[right]:
-                right = right -1
+            curheight = min(lefth, righth)
+            curArea = (right-left) * curheight
+            maxArea = max(curArea, maxArea)
+
+            if lefth > righth:
+                right -= 1
             else:
-                left = left + 1
+                left += 1
+
         return maxArea
