@@ -9,7 +9,7 @@ class Solution:
         cur = head 
         ss = set()
         while cur:
-            print(f'{cur.val}->', end='')
+            # print(f'{cur.val}->', end='')
             if cur in ss:
                 return True
             else:
