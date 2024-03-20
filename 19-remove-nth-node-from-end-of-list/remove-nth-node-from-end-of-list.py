@@ -37,7 +37,7 @@ class Solution:
         # h1.next = h1.next.next
         prev.next = prev.next.next
     
-        printlist(temp)
+        # printlist(temp)
 
         return temp.next
    
