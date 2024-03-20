@@ -3,28 +3,41 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+def printlist(somehead):
+    
+    cur = somehead
+    while cur : 
+        print(f'{cur.val}->', end='')
+        cur = cur.next
+    print("\n=======")
 class Solution:
-    def printlist(self, head):
-        current = head
-        while current:
-            print(f'{current.val}', end='')
-            if current.next:
-                print(f'->',end='')
-            current = current.next
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        # self.printlist(head)
-        dummy = ListNode(0)
-        dummy.next = head
-        # self.printlist(dummy)
-        first = dummy
-        second = dummy
+        if head.next == None :
+            return head.next
+        # if head.next.next == None and n==2:
+        #     answerhead = head.next
+            
+        #     return answerhead
 
-        for i in range(n+1):
-            second = second.next
+        
+        cur = ListNode(0)
+        h1 = cur
+        cur.next = head
+        for i in range(n):
+            cur = cur.next
+        temp = h1
 
-        while second:
-            first = first.next
-            second = second.next
-        first.next = first.next.next
-        self.printlist(dummy.next)
-        return dummy.next
+        prev = None
+        while cur : 
+            prev = h1
+            h1 = h1.next
+            cur = cur.next
+        # print(">>>>", h1.val)
+        # h1.next = h1.next.next
+        prev.next = prev.next.next
+    
+        printlist(temp)
+
+        return temp.next
+   
