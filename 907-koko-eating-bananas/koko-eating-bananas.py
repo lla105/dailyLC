@@ -1,25 +1,20 @@
 class Solution:
-    def minEatingSpeed(self, piles: List[int], hr: int) -> int:
-        print(piles)
-        def findtotal(k,piles):
-            res=0
-            for pile in piles:
-            
-                if pile%k==0:
-                    res+=pile/k
-                else:
-                    res+=(pile//k)+1
-            return res
-        h = max(piles)
-        l=1
-        minimumk=float('inf')
-        while l<=h:
-            
-            mid=(l+h)//2
-            t=findtotal(mid,piles)
-            if  t<=hr:
-                minimumk = min(minimumk,mid)
-                h=mid-1
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        
+        l = 1
+        r = max(piles)
+        res = r
+
+        while l<=r:
+            k=(l+r)//2
+            hours = 0
+            for p in piles:
+                hours += math.ceil(p/k)
+
+            if hours<=h:
+                res = min(res,k)
+                r=k-1
             else:
-                l=mid+1
-        return minimumk
+                l=k+1
+
+        return res
