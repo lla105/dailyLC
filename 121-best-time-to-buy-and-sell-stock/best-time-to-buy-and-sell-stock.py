@@ -3,9 +3,10 @@ class Solution:
         buyprice = prices[0]
         bestprofit = 0
         for i in range(1, len(prices)):
-
-            if prices[i] < buyprice:
-                buyprice = prices[i]
-            elif bestprofit < prices[i] - buyprice:
-                bestprofit = prices[i] - buyprice
+            buyprice = min(buyprice, prices[i])
+            bestprofit = max(bestprofit, prices[i]-buyprice)
+            # if prices[i] < buyprice:
+            #     buyprice = prices[i]
+            # elif bestprofit < prices[i] - buyprice:
+            #     bestprofit = prices[i] - buyprice
         return bestprofit
