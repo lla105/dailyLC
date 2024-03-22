@@ -30,5 +30,5 @@ class Solution:
                 return False
             s.add(summ)
             lst = strToList(str(summ))
-            print(">>>", summ)
+            # print(">>>", summ)
         return True
