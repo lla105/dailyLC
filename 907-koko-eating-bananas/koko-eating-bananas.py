@@ -17,12 +17,12 @@ class Solution:
         while left <= right:
             mid = (left+right)//2
             turnsUsed = countTotalTurns(piles, mid)
-            print(f'{left} ---- {mid} ---- {right}')
-            print(f'[{mid}]: , TurnsUsed: {turnsUsed}')
+            # print(f'{left} ---- {mid} ---- {right}')
+            # print(f'[{mid}]: , TurnsUsed: {turnsUsed}')
             if turnsUsed > h :
                 left = mid + 1
             else: # turnsUsed qualifies.
                 fastest = min(fastest, mid)
                 right = mid - 1
-            print(f'fastest: {fastest}')
+            # print(f'fastest: {fastest}')
         return fastest
