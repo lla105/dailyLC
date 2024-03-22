@@ -1,12 +1,9 @@
-class Solution(object):
-    def containsDuplicate(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        tempset = set()
-        for n in nums:
-            if n in tempset:
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        heheset = set() 
+        for num in nums:
+            if num in heheset : 
                 return True
             else:
-                tempset.add(n)
+                heheset.add(num)
+        return False 
