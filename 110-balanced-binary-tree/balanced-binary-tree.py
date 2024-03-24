@@ -9,13 +9,13 @@ class Solution:
     rightscore = 0
     isbalanced = True
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        print(root)
+        # print(root)
         def search(node):
             if not node:
                 return 0
             left = search(node.left)
             right = search(node.right)
-            print(f'{node.val} : {left} - {right}')
+            # print(f'{node.val} : {left} - {right}')
             if abs(left - right) > 1:
                 self.isbalanced = False
             self.leftscore = left
