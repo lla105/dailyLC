@@ -16,7 +16,11 @@ class Solution:
         def traverse(node):
             if not node:
                 return False
-            if node.val==subRoot.val and isSameTree(node, subRoot):
-                return True
+            if node.val == subRoot.val:
+                if isSameTree(node, subRoot):
+                    return True
+            # traverse(node.left)
+            # traverse(node.right)
             return traverse(node.left) or traverse(node.right)
         return traverse(root)
+    
