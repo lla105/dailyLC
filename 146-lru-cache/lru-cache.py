@@ -12,7 +12,7 @@ class LRUCache:
         return -1
 
     def put(self, key: int, value: int) -> None:
-        if key not in self.cache.keys():
+        if key not in self.cache:
             if len(self.cache.keys()) == self.capacity:
                 del self.cache[next(iter(self.cache))]
         else:
