@@ -1,13 +1,13 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        if n == 1:
+        if n==1:
             return 1
-        if n == 2:
+        if n==2:
             return 2
-        somearray = [0] * n
-        somearray[0] = 1
-        somearray[1] = 2
+        arr = [0] * n
+        arr[0] = 1
+        arr[1] = 2
 
-        for i in range(2, n):
-            somearray[i] = (somearray[i-1]) + (somearray[i-2])
-        return somearray[-1]
+        for i in range(2,n,1):
+            arr[i] = arr[i-1] + arr[i-2]
+        return arr[-1]
