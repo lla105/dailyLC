@@ -1,5 +1,7 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
+        if nums[0]==target:
+            return 0
         left = 0
         right = len(nums)-1
 
