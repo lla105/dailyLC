@@ -1,13 +1,25 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        arr = [ float('inf') ] * (amount+1)
-        arr[0] = 0
+        # def countTurns(ba, coins,i, amount):
+            
+
+        if amount==0 and coins:
+            return 0
+        ba = [ float('inf') ] * (amount+1)
+        ba[0] = 0
+        print("BA init: ", ba)
         for i in range(1, amount+1):
             for coin in coins:
                 if coin<=i:
-                    # print(i, coin)
-                    arr[i] = min( arr[i] , arr[i-coin] + 1 )
-        if arr[-1] % 1 != 0 :
-            return -1
+                    # countTurns(ba, coin,i, amount)
+                    ba[i] = min(ba[i] , ba[i-coin]+1)
+                    # print(i,coin,ba)
+
+                    # ba[i] = 99
+                # print(ba)
+
+
+        if ba[-1]%1 == 0:
+            return ba[-1]
         else:
-            return arr[-1]
+            return -1
