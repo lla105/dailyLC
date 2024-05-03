@@ -1,27 +1,21 @@
-class Solution(object):
-    def longestConsecutive(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+def CountUp(num, s) :
+    count = 0
+    while num in s:
+        count+=1
+        num+=1
+    return count
 
-        numsset = set(nums)
-        longest=  0
-        counter = 0
-
-        for n in numsset:
-            if n-1 not in numsset:
-                counter = 0
-                start = n
-                temp = []
-
-                while start in numsset:
-                    temp.append(start)
-                    print(start)
-                    start+=1
-                    counter+=1
-                print(temp)
-                longest = max(counter, longest)
-        return longest
-
-
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        answer = 0
+        s = set()
+        for num in nums:
+            s.add(num)
+        print(s)
+        for num in nums:
+            if num-1 not in s:
+                seq = CountUp(num , s)
+                answer= max(seq, answer)
+            print(answer)
+        return answer
+            
