@@ -3,14 +3,13 @@ class Solution:
         if sum(nums)<target:
             return 0
         l = 0
-        count = len(nums) + 1
+        count = len(nums)+1
         tempsum = 0
         
         for i in range(len(nums)):
             tempsum += nums[i]
             print('1.1tempsum : ', tempsum)
-
-            while tempsum >=target:
+            while tempsum >= target:
                 print('  tempsum>target, count = ', count,'vs',i-l+1)
                 count = min(count, i-l+1)
                 tempsum -= nums[l]
