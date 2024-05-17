@@ -1,33 +1,29 @@
+
+
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        
-        if n==1:
-            return ["()"]
-
+        # d = { ')':'(', ']':'[' , '}':'{' }
+        # open >= closed
+        # n >= open
         stack = []
-        result = [] #an arr that keeps track of all combination of ()()()
-        def tt( openb, closeb ) :
-            #base case
-            if openb==n and closeb==n:
+        result = []
+        def trav(open,closed):
+            if open==n and closed==n:
                 result.append(''.join(stack))
-                # print(f' RESUT += {result}')
-                return 
-            # add (
-            if openb<n:
-                stack.append("(")
-                # print(f'b >>> {stack}')
-                tt(openb+1, closeb)
-                stack.pop()
-            # add )
-
-            if openb>closeb:
-                stack.append(")")
-                # print(f'c >>> {stack}')
-
-                tt(openb, closeb+1)
+                print('1', stack)
+                # stack.pop()
+                return
+            if open<n and closed<n:
+                stack.append('(')
+                print('2', stack)
+                trav(open+1, closed)
                 stack.pop()
 
-        tt(0,0)
+            if open<=n and closed<open:
+                stack.append(')')
+                print('3', stack)
+                trav(open,closed+1)
+                stack.pop()
+                
+        trav(0,0)
         return result
-
-        
