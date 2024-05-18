@@ -13,7 +13,7 @@ class Solution:
                 print('2:', stack)
                 trav(open+1, close)
                 stack.pop()
-            if close<open and open<=n:
+            if close<open and open<=n and stack[-1]:
                 stack.append(')')
                 print('3:', stack)
                 trav(open,close+1)
