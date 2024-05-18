@@ -8,8 +8,9 @@ class Solution:
             right = len(nums)-1
             tempindex = -1
             while left<=right :
-                mid = (left+right)//2 
+                # mid = (left+right)//2 
                 # mid += left
+                mid = left + (right-left) // 2
                 print('  ', left,mid,right)
                 print('. ', nums[left], nums[mid], nums[right])
                 if nums[mid] > target:
