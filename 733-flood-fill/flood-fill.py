@@ -16,9 +16,10 @@ class Solution(object):
         self.fill(image, sr+1, sc, color, cur)
         self.fill(image, sr, sc-1, color, cur)
         self.fill(image, sr, sc+1, color, cur)
+
     def floodFill(self, image, sr, sc, color):
         # Avoid infinite loop if the new and old colors are the same...
-        if image[sr][sc] == color: 
+        if image[sr][sc] == color:
             return image
         # Run the fill function starting at the position given...
         self.fill(image, sr, sc, color, image[sr][sc])
