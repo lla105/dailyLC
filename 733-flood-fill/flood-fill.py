@@ -6,7 +6,7 @@ class Solution:
 
         def dfs(i,j):
             if i<0 or j<0 or i>=len(image) or j>=len(image[0]):
-                return 
+                return
             if image[i][j] != originalcolor:
                 return
             image[i][j] = color
@@ -14,7 +14,5 @@ class Solution:
             dfs(i-1,j)
             dfs(i,j+1)
             dfs(i,j-1)
-            return
-        
         dfs(sr,sc)
         return image
