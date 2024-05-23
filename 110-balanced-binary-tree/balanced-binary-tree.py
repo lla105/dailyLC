@@ -5,29 +5,14 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    leftscore = 0
-    rightscore = 0
-    isbalanced = True
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        # print(root)
-        def search(node):
+        def checkheight(node):
             if not node:
                 return 0
-            left = search(node.left)
-            right = search(node.right)
-            # print(f'{node.val} : {left} - {right}')
-            if abs(left - right) > 1:
-                self.isbalanced = False
-            self.leftscore = left
-            self.rightscore = right
-            return 1+ max(left, right)
+            leftH = checkheight(node.left)
+            rightH = checkheight(node.right)
+            if leftH<0 or rightH<0 or abs(leftH-rightH)>1:
+                return -1
+            return max(leftH, rightH) +1
 
-        search(root)
-        # print(self.leftscore, self.rightscore, "=", abs(self.leftscore - self.rightscore))
-        if self.isbalanced:
-            return True
-        else:
-            return False
-        
-
-        
+        return checkheight(root) != -1
