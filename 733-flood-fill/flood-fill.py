@@ -1,33 +1,25 @@
-class Solution:
-    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-
-        m = len(image)
-        n = len(image[0])
-        visited = set()
-        directions = [[0,1],[1,0],[0,-1],[-1,0]]
-        cell_value = image[sr][sc]
-        
-
-        def bfs(r,c):
-            q = collections.deque()
-            q.append((r,c))
-            visited.add((r,c))
-            image[r][c] = color
-            while q:
-                r,c = q.popleft()
-                for dr,dc in directions:
-                    r1 = r+dr
-                    c1 = c+dc
-                    if (0<=r1<m and 0<=c1<n and image[r1][c1]==cell_value and (r1,c1) not in visited):
-                        q.append((r1, c1))
-                        visited.add((r1,c1))
-                        image[r1][c1] = color
-                        
-                                
-        bfs(sr,sc)
-        print(image)
+# Time Complexity : O(n*m)
+# Space Complexity : O(n*m)
+class Solution(object):
+    def fill(self, image, sr, sc, color, cur):
+        # If sr is less than 0 or greater equals to the length of image...
+        # Or, If sc is less than 0 or greater equals to the length of image[0]...
+        if sr < 0 or sr >= len(image) or sc < 0 or sc >= len(image[0]): 
+            return
+        # If image[sr][sc] is not equal to previous color...
+        if cur != image[sr][sc]: 
+            return
+        # Update the image[sr][sc] as a color...
+        image[sr][sc] = color
+        # Make four recursive calls to the function with (sr-1, sc), (sr+1, sc), (sr, sc-1) and (sr, sc+1)...
+        self.fill(image, sr-1, sc, color, cur)
+        self.fill(image, sr+1, sc, color, cur)
+        self.fill(image, sr, sc-1, color, cur)
+        self.fill(image, sr, sc+1, color, cur)
+    def floodFill(self, image, sr, sc, color):
+        # Avoid infinite loop if the new and old colors are the same...
+        if image[sr][sc] == color: 
+            return image
+        # Run the fill function starting at the position given...
+        self.fill(image, sr, sc, color, image[sr][sc])
         return image
-
-        
-        
-        
