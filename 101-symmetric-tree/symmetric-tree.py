@@ -9,10 +9,16 @@ class Solution:
         def trav(leftnode, rightnode):
             if not leftnode and not rightnode:
                 return True
-            if (leftnode and not rightnode) or (rightnode and not leftnode) or leftnode.val!=rightnode.val:            
+
+            temp1 = not leftnode and rightnode
+            temp2 = not rightnode and leftnode
+            if temp1 or temp2 :
+                print('leaf mismatch')
                 return False
-            temp1 = trav(leftnode.left, rightnode.right)
-            temp2 = trav(leftnode.right,rightnode.left)
-            return temp1 and temp2
-        return trav(root, root)
-        # return True
+            if  leftnode.val!=rightnode.val:
+                print('val diff')
+                return False
+            temp3= trav(leftnode.left, rightnode.right)
+            temp4 = trav(leftnode.right, rightnode.left)
+            return temp3 and temp4
+        return trav(root,root)
