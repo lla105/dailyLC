@@ -6,17 +6,20 @@
 #         self.right = right
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if root is None:
+            return 0
         maxD = 0
-        def trav(node):
+        def dfs(node, maxD):
             if node is None:
-                print('   returning 0')
+                print('.  returning 0')
                 return 0
-            print(f'[{node.val}] : calling left')
-            leftH = trav(node.left)
-            print(f' [{node.val}] : calling right')
-            rightH = trav(node.right)
-            print(f'  [{node.val}] : {leftH} vs {rightH}')
-            maxD = max(leftH, rightH) +1
-            return maxD
-        return trav(root)
-        # return maxD
+            print(f'[{node.val}] : going left')
+            leftH = dfs(node.left, maxD)
+            print(f'[{node.val}] : going right')
+            rightH = dfs(node.right, maxD)
+            tempHighest = max(leftH, rightH)
+            maxD = max(tempHighest, maxD)
+            print(f'[{node.val}] maxD+1 : f{maxD+1}')
+            return maxD + 1
+        maxD2 = dfs(root, maxD)
+        return maxD2
