@@ -7,11 +7,18 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        cur = root
-        while cur:
-            if cur.val>p.val and cur.val>q.val:
-                cur = cur.left
-            elif cur.val<p.val and cur.val<q.val:
-                cur = cur.right
+        self.answer = 0
+        def trav(node,p,q):
+            # if node is None:
+            #     return 
+            if node.val>p.val and node.val>q.val:
+                trav(node.left,p,q)
+            elif node.val<p.val and node.val<q.val:
+                trav(node.right,p,q)
             else:
-                return cur
+                self.answer = node
+                return node
+
+        temp = trav(root,p,q)
+        print(self.answer)
+        return self.answer
