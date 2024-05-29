@@ -8,7 +8,7 @@ class Solution:
                 if mat[i][j]==0:
                     q.append((i,j))
                 else:
-                    mat[i][j]=m*n
+                    mat[i][j]=float('inf')
         # print(mat)
         directions = [ (1,0),(-1,0),(0,1),(0,-1)]
         while q:
