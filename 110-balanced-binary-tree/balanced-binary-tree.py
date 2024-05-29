@@ -11,16 +11,15 @@ class Solution:
         def trav(node):
             if node is None:
                 return 0
-            leftHeight = trav(node.left)
-            rightHeight = trav(node.right)
-            if abs(leftHeight-rightHeight) > 1:
+            leftreturn = trav(node.left)
+            rightreturn = trav(node.right)
+            if abs(leftreturn-rightreturn) > 1:
                 return -1
-            if leftHeight==-1 or rightHeight==-1:
+            if leftreturn==-1 or rightreturn==-1:
                 return -1
-            return max(leftHeight, rightHeight) +1
-
+            return max(leftreturn, rightreturn) +1
         temp = trav(root)
-        if temp==-1:
+        if temp is -1:
             return False
         else:
             return True
