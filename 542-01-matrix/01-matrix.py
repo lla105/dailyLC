@@ -15,11 +15,11 @@ class Solution:
             oldi, oldj = q.popleft()
             for di,dj in directions:
                 newi,newj = oldi+di,oldj+dj
-                # if newi<0 or newj<0 or newi>=m or newj>=n:
-                #     continue
-                # if mat[newi][newj]==0:
-                #     continue
-                if 0<=newi<m and 0<=newj<n and mat[newi][newj]>mat[oldi][oldj]+1:
+                if newi<0 or newj<0 or newi>=m or newj>=n:
+                    continue
+                if mat[newi][newj]==0:
+                    continue
+                if mat[newi][newj]>mat[oldi][oldj]+1:
                     mat[newi][newj]=mat[oldi][oldj]+1
                     q.append((newi,newj))
         return mat
