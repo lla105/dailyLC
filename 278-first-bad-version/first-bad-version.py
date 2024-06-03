@@ -3,14 +3,17 @@
 
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        l=0
-        r=n
+        l = 1
+        r = n
+        m = (l+r)//2
+
         while l<=r:
-            m = (l+r) // 2
-            curr = isBadVersion(m)
-            if isBadVersion(m-1) is False and curr is True:
-                return m
-            if curr is True:
-                r = m - 1
+            m = (l+r)//2
+            if isBadVersion(m) is True:
+                r = m-1
             else:
-                l = m + 1
+                if isBadVersion(m+1) is True:
+                    return m+1
+                else:
+                    l = m+1
+        return m
