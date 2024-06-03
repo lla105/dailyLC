@@ -11,6 +11,7 @@ class Solution:
         q = deque()
         q.append(root)
         resultlist = []
+
         while q:
             curlevel = []
             for i in range(len(q)):
