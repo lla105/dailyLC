@@ -6,16 +6,23 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def validate(node, low=float('-inf'), high=float('inf')):
-            # An empty tree is a valid BST
-            if not node:
+        self.isvalid = True
+
+        def trav(node, low=float('-inf'), high=float('inf')):
+            if node is None:
                 return True
             
-            # The current node's value must be between low and high
+            # Check the current node's value is within the valid range
             if node.val <= low or node.val >= high:
+                self.isvalid = False
                 return False
             
-            # Recursively validate the left and right subtrees
-            return validate(node.left, low, node.val) and validate(node.right, node.val, high)
+            # Traverse the left and right subtrees with updated constraints
+            left_valid = trav(node.left, low, node.val)
+            right_valid = trav(node.right, node.val, high)
+
+            # Return True only if both subtrees are valid
+            return left_valid and right_valid
         
-        return validate(root)
+        trav(root)
+        return self.isvalid
