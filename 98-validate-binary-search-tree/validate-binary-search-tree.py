@@ -8,21 +8,26 @@ class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         if root is None:
             return None
-        self.isvalid = True
+        self.isvalue = True
 
         def trav(node, low, high):
             if node is None:
                 return 
-            leftval = trav(node.left, low, node.val)
-            rightval = trav(node.right, node.val , high)
+            leftval = trav(node.left,low,node.val)
+            rightval = trav(node.right, node.val, high)
             # if leftval is None: 
-            #     leftval=float('-inf')
-            # if rightval is None:    
-            #     rightval=float('inf')
-            print(leftval , node.val , rightval)
-            # if leftval>=node.val or node.val>=rightval:
+            #     leftval = float('-inf')
+            # if rightval is None: 
+            #     rightval = float('inf')
             if low>=node.val or node.val>=high:
-                self.isvalid = False
+                self.isvalue = False
             return 
-        trav(root, float('-inf') , float('inf') )
-        return self.isvalid
+
+
+        trav(root, float('-inf'), float('inf'))
+        return self.isvalue
+
+
+        #6
+    #1      #7
+          #5.  #10
