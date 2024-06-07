@@ -1,11 +1,10 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        d = {}
+        d = {} # format : { (num:index) , (num:index) ....}
         for i in range(len(nums)):
             d[nums[i]] = i
         print(d)
-        if target in d:
-            return d[target]
-        else:
-            return -1
-        # return 99
+        for i,v in d.items():
+            if target==i:
+                return v
+        return -1
