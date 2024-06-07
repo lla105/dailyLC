@@ -4,15 +4,17 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-def trav(node):
-    if node==None:
-        return None
-    node.left, node.right = node.right, node.left
-    trav(node.left)
-    trav(node.right)
-    # return 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None:
+            return None
+        def trav(root):
+            if root is None:
+                return None
+            leftnode = trav(root.left)
+            rightnode = trav(root.right)
+            root.left = rightnode
+            root.right = leftnode
+            return root
         trav(root)
         return root
