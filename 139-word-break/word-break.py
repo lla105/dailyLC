@@ -1,17 +1,18 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        n = len(s)
-        dp = [False] * (n + 1)
-        dp[0] = True
-        max_len = 0 
-        for i in range(len(wordDict)):
-            max_len = max(max_len , len(wordDict[i]))
-        print(max_len)
+        dp = [False] * (len(s)+1)
+        dp[len(s)] = True
+        print(dp)
 
-        for i in range(1, n + 1):
-            for j in range(i - 1, max(i - max_len - 1, -1), -1): # Only consider words that could fit
-                if dp[j] and s[j:i] in wordDict:
-                    dp[i] = True
-                    break
-
-        return dp[n]
+        for i in range( len(s)-1 , -1 , -1):
+            for word in wordDict:
+                print(len(s) , i , len(word), word)
+                if (len(s)-i >= len(word)) :
+                    print(' len is good. word: ', s[i:i+len(word)])
+                    if s[i:i+len(word)] == word:
+                        # print('.  match!!! : ', word, ' vs ', s[len(s):i+1])
+                        dp[i] = dp[i+len(word)]
+                    if dp[i]:
+                        break
+                    
+        return dp[0]
