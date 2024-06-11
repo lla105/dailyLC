@@ -1,18 +1,19 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        dp = [False] * (len(s)+1)
-        dp[len(s)] = True
-        print(dp)
+        n = len(s)
+        dp = [False] * (n+1)
+        dp[0] = True
 
-        for i in range( len(s)-1 , -1 , -1):
+        for i in range(1,n+1):
+            print(i,") ", s[i-1])
             for word in wordDict:
-                print(len(s) , i , len(word), word)
-                if (len(s)-i >= len(word)) :
-                    print(' len is good. word: ', s[i:i+len(word)])
-                    if s[i:i+len(word)] == word:
-                        # print('.  match!!! : ', word, ' vs ', s[len(s):i+1])
-                        dp[i] = dp[i+len(word)]
-                    if dp[i]:
-                        break
-                    
-        return dp[0]
+                print('<<<<<', s[i-len(word):i] , ' vs ', word)
+                if i>=len(word):
+                    print('    3) length good')
+                    if s[i-len(word):i]==word:
+                        print('     4) word equal: ')
+                        print('        ', i,'-', len(word),'=',i-len(word))
+                        if dp[i-len(word)] is True:
+                            dp[i] = dp[i-len(word)]
+        print(dp)
+        return dp[-1]
