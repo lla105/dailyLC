@@ -7,7 +7,7 @@ class Solution:
                 return
             if target < 0:
                 return
-            print('  entering for loop')
+            print('  entering for loop starting:' , start)
             for i in range(start, len(candidates)):
                 print('    ', i)
                 backtrack(i, target - candidates[i], path + [candidates[i]])
