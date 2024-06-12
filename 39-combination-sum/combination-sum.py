@@ -1,14 +1,18 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        
-        def trav(candindex, remainsum, curlist):
-            if remainsum == 0:
-                resultlist.append(curlist)
+        def backtrack(start, target, path):
+            print(' called bt : ', target, path)
+            if target == 0:
+                result.append(path)
                 return
-            if remainsum < 0 :
+            if target < 0:
                 return
-            for i in range(candindex, len(candidates)):
-                trav(i , remainsum-candidates[i] , curlist + [candidates[i]])
-        resultlist = []
-        trav(0, target, [])
-        return resultlist
+            print('  entering for loop')
+            for i in range(start, len(candidates)):
+                print('    ', i)
+                backtrack(i, target - candidates[i], path + [candidates[i]])
+            print('  leaving for loop')
+        result = []
+        candidates.sort()
+        backtrack(0, target, [])
+        return result
