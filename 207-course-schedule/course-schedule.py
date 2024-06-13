@@ -6,22 +6,28 @@ class Solution:
             d[PR[i][1]].append(PR[i][0])
         # print(d)
         visited = [0] * numCourses
-
+        self.isCycle = False
         def dfs(node):
             if visited[node] == 1: #being visited, cycle detected
-                return False
+                self.isCycle = True
+                return 
             if visited[node] == 2: # node fully visited
-                return True
+                return 
             visited[node] = 1
 
             for neighbor in d[node]:
-                if not dfs(neighbor):
-                    return False
+                dfs(neighbor)
+                # if not dfs(neighbor):
+                #     return False
             visited[node] = 2
-            return True
+            return 
         for course in range(numCourses):
             if visited[course] == 0:
-                if not dfs(course):
-                    return False
+                dfs(course)
+                # if not dfs(course):
+                #     return False
 
-        return True
+        if self.isCycle:
+            return False
+        else:
+            return True
