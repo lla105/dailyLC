@@ -1,15 +1,14 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        answer = float('-inf')
+        maxvol = 0 
 
         l = 0
-        r = len(height)-1
+        r = len(height) - 1
         while l<r:
-            currheight = min(height[l] , height[r])
-            currArea = currheight*(r-l)
-            answer = max(answer, currArea)
+            curvol = (r-l) * min(height[l] , height[r])
+            maxvol = max(maxvol , curvol)
             if height[l] > height[r]:
-                r-=1
+                r -= 1
             else:
-                l+=1
-        return answer
+                l += 1
+        return maxvol
