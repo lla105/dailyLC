@@ -1,28 +1,27 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        premap = defaultdict(list)
-        for i, v in prerequisites:
-            premap[i].append(v)
+        d = defaultdict(list)
+        PR = prerequisites
+        for i in range(len(PR)):
+            d[PR[i][1]].append(PR[i][0])
+        # print(d)
+        visited = [0] * numCourses
 
-        visited = set()  # Nodes that have been fully processed
-        visiting = set() # Nodes that are being visited in the current path
-        
         def dfs(node):
-            if node in visiting:
-                return True  # Found a cycle
-            if node in visited:
-                return False # No cycle from this node
-            
-            visiting.add(node)
-            for neighbor in premap[node]:
-                if dfs(neighbor):
-                    return True
-            visiting.remove(node)
-            visited.add(node)
-            return False
-
-        for n in range(numCourses):
-            if dfs(n):
+            if visited[node] == 1: #being visited, cycle detected
                 return False
+            if visited[node] == 2: # node fully visited
+                return True
+            visited[node] = 1
+
+            for neighbor in d[node]:
+                if not dfs(neighbor):
+                    return False
+            visited[node] = 2
+            return True
+        for course in range(numCourses):
+            if visited[course] == 0:
+                if not dfs(course):
+                    return False
 
         return True
