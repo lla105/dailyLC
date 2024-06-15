@@ -13,10 +13,11 @@ class Solution:
             # print(i,") ")
             for coin in coins : 
                 if coin <= i :
-                    numberA = LeastCoin[i]
-                    numberB = LeastCoin[i - coin] + 1
-                    smallerNumber = min(numberA, numberB)
-                    LeastCoin[i] = smallerNumber
+                    LeastCoin[i] = min(LeastCoin[i] , LeastCoin[i - coin] + 1)
+                    # numberA = LeastCoin[i]
+                    # numberB = LeastCoin[i - coin] + 1
+                    # smallerNumber = min(numberA, numberB)
+                    # LeastCoin[i] = smallerNumber
         # print(LeastCoin)
         # return LeastCoin[-1]
         if LeastCoin[-1] % 1 != 0 :
