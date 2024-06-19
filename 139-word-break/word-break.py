@@ -1,17 +1,16 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        n = len(s)
-        dp = [False] * (n+1)
+        dp = [ False ] * (len(s)+1)
         dp[0] = True
-
-        for i in range(1, n+1):
-            print(i)
-            for word in wordDict:
-                print(s[i-len(word) : i])
-                if i>=len(word):
-                    if s[i-len(word) : i] == word:
-                        print(' num is good!!!')
-                        if dp[i-len(word)] :
-                            dp[i] = dp[i-len(word)]
-
+        print(dp)
+        
+        for i in range(len(s)):
+            if dp[i]:  # Only proceed if the substring up to i can be segmented
+                for word in wordDict:
+                    end_index = i + len(word)
+                    if end_index <= len(s) and s[i:end_index] == word:
+                        dp[end_index] = True
+        
+        return dp[len(s)]
+        print(dp)
         return dp[-1]
