@@ -1,22 +1,21 @@
 class TimeMap:
 
     def __init__(self):
-        self.dic = defaultdict(list)
-        # print('init ')
+        self.d = defaultdict(list) 
+        # format : { key : (value , timestamp) , (value2, timestamp2) }
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        # print('set : [', key,value,timestamp,']')
-        self.dic[key].append( (value,timestamp) )
-
+        if key in self.d:
+            self.d[key].append( (value, timestamp) )
+        else:
+            self.d[key] = [ (value,timestamp) ]
+            
     def get(self, key: str, timestamp: int) -> str:
-        # print('get : ', self.dic[key], 'timestamp:',timestamp)
-        temp = ""
-        n = len(self.dic[key])
-        for i in range(n-1, -1, -1):
-            # print('  loop: ', self.dic[key][i])
-            if timestamp>=self.dic[key][i][1]:
-                return self.dic[key][i][0]
-        # print()
+        if key in self.d :
+            for i in range(len(self.d[key])-1, -1, -1):
+                # print('>>>>', self.d[key][1])
+                if self.d[key][i][1] <= timestamp:
+                    return self.d[key][i][0]
         return ""
 
 
