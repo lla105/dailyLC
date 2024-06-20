@@ -6,24 +6,21 @@ class Solution:
         zeros = 0
         ones = 0
         twos = 0
-        for num in nums:
-            if num==2:
-                twos+=1
-            if num == 1:
-                ones += 1
-            if num == 0:
-                zeros += 1
-
-        n = len(nums)
-        for i in range(n):
+        for i in range(len(nums)):
+            if nums[i] == 0:
+                zeros+=1
+            if nums[i] == 1:
+                ones+=1 
+            if nums[i] == 2:
+                twos += 1
+        index = 0
+        for i in range(len(nums)):
             if zeros>0:
+                nums[i]= 0
                 zeros-=1
-                nums[i] = 0
             elif ones>0:
+                nums[i]=1
                 ones-=1
-                nums[i] = 1
             elif twos>0:
+                nums[i]=2
                 twos-=1
-                nums[i] = 2
-        
-            
