@@ -2,7 +2,7 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         result = []
         def trav(curpath , available):
-            if len(curpath) == len(nums) or not available:
+            if len(curpath) == len(nums) :
                 result.append(curpath)
                 return
             for i in range(len(available)):
