@@ -1,9 +1,8 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        result = []
-        if not digits :
-            return result
-        
+        if not digits:
+            return []
+
         dic = {
             '2':'abc',
             '3':'def',
@@ -14,18 +13,18 @@ class Solution:
             '8':'tuv',
             '9':'wxyz',
         }
-        def backtrack(index, curCombination):
-            if len(curCombination) == len(digits):
-                result.append(curCombination[:])
+        result = []
+        def bt(curArray, numIndex):
+            if len(curArray) == len(digits):
+                result.append(''.join(curArray))   
                 return
-            
-            # for i in range(len(digits[index])):
-            #     letter = dic[digits[index]]
-            # for letter in dic[digits[index]]:
-            for letter in dic[digits[index]]:
-                nextIndex = index+1
-                tempCombo = curCombination + letter
-                backtrack(nextIndex , tempCombo)
-                # backtrack(index + 1, curCombination + letter)
-        backtrack(0,"")
+            letters = dic[digits[numIndex]]
+            for letter in letters:
+                # curArray.append(letter)
+
+                bt(curArray + [letter] , numIndex+1)
+                # curArray.pop()
+            return
+        bt([] , 0)
         return result
+            
