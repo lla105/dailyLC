@@ -16,9 +16,9 @@ class Solution:
             if target<sum(curList):
                 return
                 
-            for i in range( len(cand)):
+            for i in range(index, len(cand)):
                 c = cand[i]
-                trav( curList+[c] ,0)
+                trav( curList+[c] ,i)
 
         trav([] , 0)
 
