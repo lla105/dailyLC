@@ -10,7 +10,8 @@ class Solution:
         def trav(curList, index):
             if target==sum(curList):
                 curList = sorted(curList)
-                self.result.add( tuple(curList) )
+
+                self.result.add(tuple(curList) )
                 return
             if target<sum(curList):
                 return
