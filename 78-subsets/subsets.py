@@ -1,14 +1,17 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        self.result = []
+        self.result = set()
 
-        def backtrack(startindex, path):
-            self.result.append(path[:])
+        def bt(availableList , curList) :
+            curList = sorted(curList)
+            self.result.add( tuple(curList) )
 
-            for i in range(startindex, len(nums)):
-                path.append(nums[i])
+            for i in range(len(availableList)):
+                nextavailableList = availableList[:i] + availableList[i+1:]
+                tempA = nextavailableList
+                tempB = curList + [availableList[i]]
+                # bt(nextavailableList , curList[availableList[i]])
+                bt(tempA, tempB)
 
-                backtrack(i+1, path )
-                path.pop()
-        backtrack(0, [])
+        bt(nums, [])
         return self.result
