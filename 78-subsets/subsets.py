@@ -3,7 +3,7 @@ class Solution:
         self.result = set()
 
         def bt(availableList , curList , startindex) :
-            curList = sorted(curList)
+            # curList = sorted(curList)
             self.result.add( tuple(curList) )
 
             for i in range(startindex, len(availableList)):
@@ -11,7 +11,7 @@ class Solution:
                 tempA = nextavailableList
                 tempB = curList + [availableList[i]]
                 # bt(nextavailableList , curList[availableList[i]])
-                bt(tempA, tempB, startindex)
+                bt(tempA, tempB, i)
 
         bt(nums, [], 0)
         return self.result
