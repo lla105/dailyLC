@@ -11,7 +11,7 @@ class Solution:
                 self.result.add( tuple(curList) )
                 return
             
-            for i in range(len(candidates)):
+            for i in range(index, len(candidates)):
                 nextList = curList + [candidates[i]]
                 backtrack(i, nextList)
                 
