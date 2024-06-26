@@ -10,10 +10,10 @@ class Solution:
             if sum(curArray) > target:
                 return
             if sum(curArray)==target:
-                curArray = sorted(curArray)
+                # curArray = sorted(curArray)
                 self.results.add( tuple(curArray) )
                 return
-            for i in range(len(candidates)):
+            for i in range( index, len(candidates)):
                 c = candidates[i]
                 nextArray = curArray + [c]
                 bf(i,nextArray)
