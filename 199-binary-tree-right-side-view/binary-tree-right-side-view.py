@@ -15,7 +15,7 @@ class Solution:
             
             trav(level+1, node.left)
             trav(level+1, node.right)
-            print('   ', level, node.val)
+            # print('   ', level, node.val)
             self.d[level] = node.val
         trav(0, root)
         print(self.d)
