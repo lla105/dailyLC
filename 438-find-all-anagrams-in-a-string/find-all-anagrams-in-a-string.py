@@ -23,7 +23,7 @@ class Solution:
             for pi, pv in pdic.items():
                 if pi in sdic and pv==sdic.get(pi):
                     # print('2)   match: ', pi, pv)
-                    print()
+                    pass
                 else:
                     isAnagram = False
                     continue
