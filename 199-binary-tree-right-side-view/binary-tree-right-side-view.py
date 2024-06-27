@@ -8,17 +8,19 @@ class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
             return []
-        q = deque()
-        q.append(root)
+        self.d = {} #format : { level:val }
+        def trav(level, node):
+            if not node:
+                print(' empty...')
+                return
+            print('  ', level, node.val)
+            self.d[level] = node.val
+            trav(level+1, node.left)
+            trav(level+1, node.right)
+            return
+        trav(0,root)
+        print(self.d)
         result = []
-        while q:
-            rightmost = None
-            for i in range(len(q)):
-                node = q.popleft()
-                if node:
-                    rightmost = node
-                    q.append(node.left)
-                    q.append(node.right)
-            if rightmost:
-                result.append(rightmost.val)
+        for i,v in self.d.items():
+            result.append(v)
         return result
