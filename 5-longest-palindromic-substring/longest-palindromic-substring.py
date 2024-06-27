@@ -2,6 +2,7 @@ class Solution:
     def longestPalindrome(self, s: str) -> str:
         
         maxsubstring = ''
+        # for odd substrings palindromes
         for i in range(len(s)):
             l = i
             r = i
@@ -12,6 +13,8 @@ class Solution:
                 
                 l-=1
                 r+=1
+
+        # for even substrings palindromes
         for i in range(len(s)-1):
             l = i
             r = i+1
