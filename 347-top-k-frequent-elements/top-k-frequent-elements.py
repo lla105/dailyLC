@@ -20,7 +20,7 @@ class Solution:
 
         result = []
         for i in range(len(nums), -1, -1):
-            print(i)
+            # print(i)
             if i in freqDict and k>0:
                 j=0
                 for j in range(len(freqDict[i])):
