@@ -6,28 +6,30 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        if root is None:
-            return None
-        self.isvalue = True
+        if not root:
+            return True
+        self.isBalanced = True
+        def bt(node, low, high):
+            if not node:
+                return None
+            
+            leftval = bt(node.left, low, node.val)
+            rightval = bt(node.right, node.val , high)
 
-        def trav(node, low, high):
-            if node is None:
-                return 
-            leftval = trav(node.left,low,node.val)
-            rightval = trav(node.right, node.val, high)
-            # if leftval is None: 
-            #     leftval = float('-inf')
-            # if rightval is None: 
-            #     rightval = float('inf')
-            if low>=node.val or node.val>=high:
-                self.isvalue = False
-            return 
+            if leftval is None:
+                leftval = float('-inf')
+            if rightval is None:
+                rightval = float('inf')
 
+            print(leftval , node.val, rightval)
+            if low < node.val and node.val < high:
+                print('good')
+                pass
+            else:
+                print('BAD')
+                self.isBalanced = False
+            return node.val
+            
 
-        trav(root, float('-inf'), float('inf'))
-        return self.isvalue
-
-
-        #6
-    #1      #7
-          #5.  #10
+        bt(root, float('-inf') , float('inf'))
+        return self.isBalanced
