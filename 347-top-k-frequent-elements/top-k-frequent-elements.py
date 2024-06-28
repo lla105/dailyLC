@@ -9,12 +9,14 @@ class Solution:
  
         freqDict = {} # format : { freq: [num1, num2, ...] }
         # freqDict = {defaultdict(list)}
+        maxfreq = 0
         for i,v in d.items():
             if v in freqDict:
                 freqDict[v].append(i)
             else:
                 freqDict[v] = [i]
-            
+            maxfreq = max(maxfreq, i)
+        print(maxfreq)
         print(d)
         print(freqDict)
 
