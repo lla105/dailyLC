@@ -5,8 +5,8 @@ class Solution:
         def bt(index, curList):
 
             if sum(curList)==target:
-                print(curList)
-                curList = sorted(curList)
+                # print(curList)
+                # curList = sorted(curList)
                 self.result.add( tuple(curList) )
                 return
 
