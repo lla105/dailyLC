@@ -13,15 +13,10 @@ class Solution:
             if not node:
                 return None
             
-            leftval = bt(node.left, low, node.val)
-            rightval = bt(node.right, node.val , high)
+            bt(node.left, low, node.val)
+            bt(node.right, node.val , high)
 
-            if leftval is None:
-                leftval = float('-inf')
-            if rightval is None:
-                rightval = float('inf')
-
-            print(leftval , node.val, rightval)
+            print(low , node.val, high, end=' ----> ')
             if low < node.val and node.val < high:
                 print('good')
                 pass
