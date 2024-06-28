@@ -9,7 +9,7 @@ class Solution:
             for j in range(len(matrix[0])):
                 if matrix[i][j] == 0:
                     startingzeros.append( (i,j) )
-        print(startingzeros)
+        # print(startingzeros)
 
         for x,y in startingzeros:
             # for rows
@@ -17,5 +17,5 @@ class Solution:
                 matrix[x][col] = 0
             for row in range(len(matrix)):
                 matrix[row][y] = 0
-        print(matrix)
+        # print(matrix)
         return matrix
