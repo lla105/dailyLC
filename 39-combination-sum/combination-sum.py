@@ -5,6 +5,7 @@ class Solution:
         def bt(index, curList):
 
             if sum(curList)==target:
+                print(curList)
                 curList = sorted(curList)
                 self.result.add( tuple(curList) )
                 return
@@ -12,8 +13,8 @@ class Solution:
             if sum(curList) > target:
                 return
             
-            for i in range(len(candidates)):
-                bt(index, curList+[candidates[i]])
+            for i in range(index, len(candidates)):
+                bt(i, curList+[candidates[i]])
 
         bt(0, [])
         return self.result
