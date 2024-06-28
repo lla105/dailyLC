@@ -1,21 +1,20 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        if target==0:
-            return []
-        self.results = set()
+        
+        self.result = set()
+        def bt(index, curList):
 
-        #index for candidates.
-        # curArray for [2,2,3], or [7]
-        def bf(index , curArray):
-            if sum(curArray) > target:
+            if sum(curList)==target:
+                curList = sorted(curList)
+                self.result.add( tuple(curList) )
                 return
-            if sum(curArray)==target:
-                # curArray = sorted(curArray)
-                self.results.add( tuple(curArray) )
+
+            if sum(curList) > target:
                 return
-            for i in range( index, len(candidates)):
-                c = candidates[i]
-                nextArray = curArray + [c]
-                bf(i,nextArray)
-        bf(0, [])
-        return self.results
+            
+            for i in range(len(candidates)):
+                bt(index, curList+[candidates[i]])
+
+        bt(0, [])
+        return self.result
+
