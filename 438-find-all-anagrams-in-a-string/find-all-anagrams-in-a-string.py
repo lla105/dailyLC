@@ -1,33 +1,28 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        pdic = Counter(p)
-        sdic = {}
-        result = []
-        sString = deque()
-        for i in range(len(s)):
-            sdic[s[i]] = sdic.get(s[i] , 0) + 1
-            sString.append(s[i])
-            if i<len(p)-1:
-                continue
-            isAnagram = True
-            for pi,pv in pdic.items():
-                if pi in sdic and pv==sdic.get(pi):
-                    pass
-                else:
-                    isAnagram = False
-                    continue
-            if isAnagram :
-                result.append(i-len(p)+1)
-                
-            lastchar = s[i-len(p)+1]
-            # if sdic.get(lastchar):
-            #     print(lastchar, ' is good')
-            # else:
-            #     print(lastchar, ' is None')
-            # print(i, ").     ", sdic)
+        p_count = defaultdict(int) 
+        for c in p:
+            p_count[c] += 1
 
-            if sdic.get(lastchar) == 1:
-                sdic.pop(lastchar)
-            elif sdic.get(lastchar) >1:
-                sdic[lastchar] -= 1
-        return result
+        res = []
+        m = len(p)
+        missing = set(p)
+        window = defaultdict(int)
+
+        def update_missing(c):
+            if c in missing and window[c] == p_count[c]:
+                missing.remove(c)
+            elif p_count[c] and window[c] != p_count[c]:
+                missing.add(c)
+
+        for i, c in enumerate(s):
+            window[c] += 1
+            update_missing(c)
+            if i >= m - 1:
+                out_idx = i - m + 1
+                if not missing:
+                    res.append(out_idx)
+                window[s[out_idx]] -= 1
+                update_missing(s[out_idx])
+
+        return res
