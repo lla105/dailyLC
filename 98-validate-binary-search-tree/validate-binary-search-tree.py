@@ -6,25 +6,19 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        if not root:
-            return True
-        self.isBalanced = True
+        self.answer = True
         def bt(node, low, high):
             if not node:
-                return None
+                return 
             
             bt(node.left, low, node.val)
-            bt(node.right, node.val , high)
-
-            print(low , node.val, high, end=' ----> ')
-            if low < node.val and node.val < high:
-                print('good')
+            bt(node.right, node.val, high)
+            if low < node.val < high:
                 pass
             else:
-                print('BAD')
-                self.isBalanced = False
-            return node.val
-            
+                self.answer = False
+                return
 
-        bt(root, float('-inf') , float('inf'))
-        return self.isBalanced
+
+        bt(root,float('-inf') , float('inf'))
+        return self.answer
