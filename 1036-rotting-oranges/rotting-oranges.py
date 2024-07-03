@@ -28,7 +28,7 @@ class Solution:
         minutesPassed = 0
         directions = [ (1,0), (-1,0), (0,1), (0,-1) ]
         while rottencells and freshoranges>0:
-            print(rottencells)
+            # print(rottencells)
             minutesPassed += 1
             for _ in range(len(rottencells)):
                 x,y = rottencells.popleft()
