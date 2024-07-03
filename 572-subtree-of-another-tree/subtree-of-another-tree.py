@@ -5,22 +5,38 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    issr = False
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        def findsubroot(node):
+            if not node:
+                return
+            if node.val == subRoot.val:
+                print('found root :', node.val)
+                self.subrootnodes.append(node)
+                # return 
+            findsubroot(node.left)
+            findsubroot(node.right)
+
         def isSameTree(p, q):
             if not p and not q:
                 return True
             if p and q and p.val==q.val:
-                return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
+                isSameTree(p.left, q.left)
+                isSameTree(p.right, q.right)
+                return 
+            self.issubtree = False
             return False
-        def traverse(node):
-            if not node:
-                return False
-            if node.val == subRoot.val:
-                if isSameTree(node, subRoot):
-                    return True
-            # traverse(node.left)
-            # traverse(node.right)
-            return traverse(node.left) or traverse(node.right)
-        return traverse(root)
-    
+
+        self.subrootnodes = []
+        findsubroot(root)
+        # print(self.subrootnodes)
+        for node in self.subrootnodes:
+            self.issubtree = True
+            print('node : ', node.val)
+            isSameTree( node, subRoot)
+            if self.issubtree == True:
+                return True
+        # isSameTree(self.subrootnode ,subRoot)
+        if not self.subrootnodes:
+            return False
+        else:
+            return self.issubtree
