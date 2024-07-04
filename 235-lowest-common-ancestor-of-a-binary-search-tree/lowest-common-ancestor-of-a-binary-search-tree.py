@@ -7,19 +7,22 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if not root: return root
-        self.answer = TreeNode()
-        def trav(node,p,q):
-            if not node: 
+        if not root:
+            return None
+
+        def bt(node):
+            if not node:
+                return None
+            if node.val==p.val or node.val==q.val:
                 return node
-            print()
-            if node.val>p.val and node.val>q.val:
-                trav(node.left,p,q)
-            elif node.val<p.val and node.val<q.val:
-                trav(node.right,p,q)
-            else:
-                self.answer = node
+            left = bt(node.left)
+            right = bt(node.right)
+
+            if left and right:
                 return node
-        trav(root,p,q)
-        return self.answer
-        # return 
+            if left:
+                return left
+            if right:
+                return right
+
+        return bt(root)
