@@ -5,7 +5,7 @@ class Solution:
         while i<len(intervals) and intervals[i][1] < newInterval[0]:
             result.append(intervals[i])
             i += 1
-        print(result)
+        # print(result)
         temp = newInterval
 
         while i<len(intervals) and intervals[i][0] <= temp[1] :
@@ -13,7 +13,7 @@ class Solution:
             temp[1] = max(temp[1], intervals[i][1])
             i+=1
         result.append(temp)
-        print(result)
+        # print(result)
         while i<len(intervals):
             result.append(intervals[i])
             i+=1
