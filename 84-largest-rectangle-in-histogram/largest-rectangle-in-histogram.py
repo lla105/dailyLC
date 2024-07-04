@@ -1,33 +1,38 @@
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
+        if len(heights)==1:
+            return heights[-1]
         stack = []
         maxarea = 0
         for i in range(len(heights)):
-            curheight = heights[i]
             startindex = i
-            while len(stack)>0 and stack[-1][0] > curheight:
-                # print('entering loop with: ', i,':',curheight)
-                tempwidth = i - stack[-1][1]
-                temparea = tempwidth * stack[-1][0]
-                maxarea = max(maxarea, temparea)
-                startindex = stack[-1][1]
-                stack.pop()
+            if stack and heights[i] < stack[-1][0]:
+                while stack and heights[i] < stack[-1][0]:
+                    w = i - stack[-1][1] 
+                    h = stack[-1][0]
+                    curarea = w*h
+                    maxarea = max(maxarea, curarea)
+                    startindex = stack[-1][1]
+                    stack.pop()
+                stack.append( (heights[i], startindex) )
+            else:
+                stack.append( (heights[i], startindex) )
+            # print('cur stack: ', stack)
 
-            stack.append( (curheight, startindex))
-            # print('stack: ', stack)
-            # print('maxarea so far: ', maxarea)
-        maxstacklength = len(stack) 
-
-        # for i in range(len(stack)):
-        #     tempwidth = maxstacklength - i
-        #     temparea = tempwidth * stack[i][0]
-        #     maxarea = max(maxarea, temparea)
-
-        for i in range(len(stack)):
-            curheight = stack[i][0]
-            curindex = stack[i][1]
-            temparea = curheight * (len(heights) - curindex)
+        print('stack after 1st round: ', stack)
+        for i in range(len(stack)-1, 0, -1):
+            # print(stack[i][0] , stack[i][1])
+            w = len(heights)-stack[i][1]
+            h = stack[i][0]
+            temparea = w*h
+            # print(i,")   ", w,"*",h,"=",temparea)
             maxarea = max(temparea, maxarea)
-        print()
-        print('maxarea final : ', maxarea)
+        w = len(heights)
+        h = stack[0][0]
+        temparea = w*h
+        print("x)   ", w,"*",h,"=",temparea)
+
+        maxarea = max(temparea, maxarea)
+
+        
         return maxarea
