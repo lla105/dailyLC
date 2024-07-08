@@ -1,28 +1,47 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        p_count = defaultdict(int) 
-        for c in p:
-            p_count[c] += 1
+        sdic = {}
+        pdic = {}
+        for i in range(len(p)):
+            pdic[p[i]] = pdic.get(p[i], 0) + 1
+        # print(pdic)
+        result = []
+        sdic = {}
+        stack = deque()
+        for i in range(len(s)):
+            if i < len(p) - 1:
+                stack.append(s[i])
+                sdic[s[i]] = sdic.get(s[i], 0 ) + 1
+                continue
 
-        res = []
-        m = len(p)
-        missing = set(p)
-        window = defaultdict(int)
+            sdic[s[i]] = sdic.get(s[i], 0 ) + 1
+            stack.append(s[i])
+            # print(sdic, stack)
+            # compare
+            matches = True
+            for char, count in pdic.items():
+                if sdic.get(char) != count:
+                    matches = False
+            if matches :
+                result.append(i-len(p)+1)
+            temp = stack.popleft()
+            # print('removing : ', sdic.pop(temp) )
+            if temp in sdic and sdic.get(temp) > 1:
+                sdic[temp] -= 1
+            else:
+                sdic.pop(temp)
 
-        def update_missing(c):
-            if c in missing and window[c] == p_count[c]:
-                missing.remove(c)
-            elif p_count[c] and window[c] != p_count[c]:
-                missing.add(c)
+        return result
+        # result = []
+        # p = sorted(p)
+        # for i in range(len(s)-len(p)+1):
+        #     temps = ''.join(sorted(s[i:i+len(p)]))
+        #     # print(s[i:i+len(p)], temps)
+        #     count = 0
+        #     for j in range(len(p)):
+        #         if temps[j] == p[j]:
+        #             count+=1
+        #     if count == len(p):
+        #         result.append(i)
 
-        for i, c in enumerate(s):
-            window[c] += 1
-            update_missing(c)
-            if i >= m - 1:
-                out_idx = i - m + 1
-                if not missing:
-                    res.append(out_idx)
-                window[s[out_idx]] -= 1
-                update_missing(s[out_idx])
-
-        return res
+        # return result
