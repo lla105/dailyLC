@@ -12,16 +12,16 @@ class Solution:
         for i in range(len(customers)):
             cur_arrive = customers[i][0]
             tempwaited = customers[i][1] 
-            print(f'{i} )')
+            # print(f'{i} )')
             if prev_finish >= cur_arrive:
-                print(f'    clash!')
+                # print(f'    clash!')
                 tempwaited += prev_finish - cur_arrive
                 # cur_arrive = prev_finish
-            print(f'    cur_arrive: {cur_arrive}, waited:{tempwaited}')
+            # print(f'    cur_arrive: {cur_arrive}, waited:{tempwaited}')
             
             prev_finish = cur_arrive + tempwaited
             total_waited.append(tempwaited)
-            print(f'    finished at:{prev_finish}')
+            # print(f'    finished at:{prev_finish}')
 
 
         total_sum = sum(total_waited)
