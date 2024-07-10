@@ -5,12 +5,12 @@ class Solution:
         def bt(curList, available, index):
             if len(curList) > len(nums):
                 return
-            print(curList)
+            # print(curList)
             result.append(curList)
 
             for i in range(index, len(nums)):
                 nextavailable = nums[:i] + nums[i+1:]
-                print('next available : ', nextavailable)
+                # print('next available : ', nextavailable)
                 nextList = curList + [nums[i]]
                 bt(nextList , nextavailable, i+1)
         bt([] , nums, 0)
