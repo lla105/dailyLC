@@ -1,17 +1,17 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        self.result = set()
+        result = []
 
-        def bt(availableList , curList , startindex) :
-            # curList = sorted(curList)
-            self.result.add( tuple(curList) )
+        def bt(curList, available, index):
+            if len(curList) > len(nums):
+                return
+            print(curList)
+            result.append(curList)
 
-            for i in range(startindex, len(availableList)):
-                nextavailableList = availableList[:i] + availableList[i+1:]
-                tempA = nextavailableList
-                tempB = curList + [availableList[i]]
-                # bt(nextavailableList , curList[availableList[i]])
-                bt(tempA, tempB, i)
-
-        bt(nums, [], 0)
-        return self.result
+            for i in range(index, len(nums)):
+                nextavailable = nums[:i] + nums[i+1:]
+                print('next available : ', nextavailable)
+                nextList = curList + [nums[i]]
+                bt(nextList , nextavailable, i+1)
+        bt([] , nums, 0)
+        return result
