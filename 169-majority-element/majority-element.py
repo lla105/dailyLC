@@ -8,9 +8,7 @@ class Solution:
         print(d)
         answer = 0
         for i,v in d.items():
-            print(i,v)
             if highest < v:
-                print('update ')
                 highest = v
                 answer = i
         return answer
