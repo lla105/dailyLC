@@ -2,7 +2,7 @@ class Solution:
     def reverseParentheses(self, s: str) -> str:
         stack = []
         bracketpairs = []
-
+      
         for i in range(len(s)):
             if s[i]=='(':
                 stack.append(i)
@@ -21,3 +21,8 @@ class Solution:
             if char!='(' and char!=')':
                 result += char
         return ''.join(result)
+
+        # edetocel
+        # lecotede
+        # leetocde
+        # leetcode
