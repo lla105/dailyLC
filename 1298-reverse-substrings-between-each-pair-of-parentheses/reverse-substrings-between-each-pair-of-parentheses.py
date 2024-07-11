@@ -9,10 +9,7 @@ class Solution:
             if s[i]==')':
                 prevopen = stack.pop()
                 bracketpairs.append( (prevopen, i))
-        print(stack)
-        print(bracketpairs)
         slist = list(s)
-        print(slist)
         for i,j in bracketpairs:
             while i<j:
                 slist[i],slist[j] = slist[j],slist[i]
