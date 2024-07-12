@@ -1,8 +1,8 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
-            return []
-        dic = {
+            return ''
+        ddic = {
             '2':'abc',
             '3':'def',
             '4':'ghi',
@@ -10,22 +10,21 @@ class Solution:
             '6':'mno',
             '7':'pqrs',
             '8':'tuv',
-            '9':'wxyz',
+            '9':'wxyz'
         }
-
-        self.result = set()
-        # curList = ['#'] * len(digits) # ['a' , 'd']
-
-        def bf(curList, index):
-            if len(curList) == len(digits):
-                self.result.add(''.join(curList))
+        result = set()
+        def backtrack( curList, index):
+            print(curList, index)
+            if index>=len(digits):
+            # if len(curList) == len(digits):
+                result.add( ''.join(curList) )
                 return
-            number = digits[index]
-            letters = dic[number]
+            curnum = digits[index]
+            letters = ddic[curnum]
+
             for i in range(len(letters)):
                 char = letters[i]
-                bf(curList + [char] , index+1)
-        bf([], 0)
-        print(self.result)
+                backtrack(curList+[char] , index+1)
+        backtrack([] , 0)
 
-        return self.result
+        return result
