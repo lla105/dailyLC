@@ -13,14 +13,14 @@ class Solution:
             xy = x
             dominant = 'ab'
             nondom = 'ba'
-        print('s       : ', s, 'dom:',dominant,'nondom:',nondom)
+        # print('s       : ', s, 'dom:',dominant,'nondom:',nondom)
         
         domcount = 0
         nondomcount = 0
 
         stack = []
-        printlist(stack)
-        print()
+        # printlist(stack)
+        # print()
 
         for i in range(len(s)):
             if stack and s[i]==dominant[1]:
@@ -31,8 +31,8 @@ class Solution:
                     stack.append(s[i])
             else:
                 stack.append(s[i])
-        print(s)
-        print(''.join(stack))
+        # print(s)
+        # print(''.join(stack))
         news = ''.join(stack)
         stack = []
         for i in range(len(news)):
