@@ -4,7 +4,19 @@ class MedianFinder:
         self.stack = []
 
     def addNum(self, num: int) -> None:
-        bisect.insort_left(self.stack, num)
+        if not self.stack:
+            self.stack.append(num)
+        else:
+            # Binary search to find the correct insertion point
+            l, r = 0, len(self.stack)
+            while l < r:
+                mid = (l + r) // 2
+                if self.stack[mid] < num:
+                    l = mid + 1
+                else:
+                    r = mid
+            self.stack.insert(l, num)
+        # bisect.insort_left(self.stack, num)
         # if not self.stack:
         #     self.stack.append(num)
         # else:
