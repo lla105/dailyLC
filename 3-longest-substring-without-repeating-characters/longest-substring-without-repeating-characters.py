@@ -1,24 +1,25 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if not s:
-            return 0
-        if len(s)==1:
-            return 1
+        
         stack = deque()
-        sdic = {}
-        maxlength = 0
+        ss = set()
+        count = 0
+        answer = 0
         for i in range(len(s)):
-            if not stack or i == 0 :
+            if s[i] not in ss and s[i] not in stack:
                 stack.append(s[i])
-                sdic[s[i]] = 1
-                continue
-            if s[i] in sdic:
-                # repeating somwhere in stack
-                while stack and s[i] in sdic:
-                    lastchar = stack.popleft()
-                    sdic.pop(lastchar)
-            stack.append(s[i])
-            sdic[s[i]] = 1
-            maxlength = max(maxlength, len(stack))
+                ss.add(s[i])
+                count+=1
 
-        return maxlength
+            else:
+                while s[i] in ss:
+                    removed = stack.popleft()
+                    ss.remove(removed)
+                    count -= 1
+                stack.append(s[i])
+                ss.add(s[i])
+                count+=1
+            answer = max(answer, count)
+
+        return answer
+                
