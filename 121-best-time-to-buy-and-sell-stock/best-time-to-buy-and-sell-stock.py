@@ -1,14 +1,12 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        buyprice = float('inf')
-        answer = float('-inf')
-        for price in prices:
-
-            if price < buyprice:
-                buyprice = price
-            profit = price - buyprice
-            answer = max(answer, profit)
-        if answer>0:
-            return answer
-        else:
-            return 0
+        highestprice = prices[-1]
+        maxprofit = 0
+        for i in range(len(prices)-1, -1, -1):
+            # print(i,'). ', highestprice, prices[i])
+            if prices[i] >= highestprice:
+                highestprice = prices[i]
+            else:
+                maxprofit = max(maxprofit , highestprice-prices[i])
+            # print(' >>>> ', highestprice)
+        return maxprofit
