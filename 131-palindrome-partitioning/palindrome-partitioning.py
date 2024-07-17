@@ -1,18 +1,16 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        res = []
+        result = set()
 
-        def backtrack(i,curr):
-            if i==len(s):
-                res.append(curr[:])
-            
-            for j in range(i,len(s)):
-                # if s[i:j+1]==s[i:j+1][::-1]:
-                if s[i:j+1]== ''.join(reversed(s[i:j+1])):
+        def bf(curList, startindex):
+            if startindex >= len(s):
+                result.add( tuple(curList) )
+                return
+            for i in range(startindex, len(s)):
+                string1 = s[startindex:i+1]
+                string2 = ''.join(reversed(s[startindex:i+1]))
+                if string1 == string2:
+                    bf(curList + [string1] , i+1)
 
-                    # curr.append(s[i:j+1])
-                    backtrack(j+1,curr+ [s[i:j+1]])
-                    # curr.pop()
-
-        backtrack(0,[])
-        return res
+        bf([] , 0)
+        return result
