@@ -7,29 +7,23 @@
 class Solution:
     def countPairs(self, root: TreeNode, distance: int) -> int:
         self.pairs = 0
-        leafs = set()
-        def trav(node):
+        def bt(node):
             if not node:
                 return []
-            if not node.left and not node.right:
+            if not node.left and not node.right: # is leaf
                 return [1]
-            left = trav(node.left)
-            right = trav(node.right)
-            # if left and right:
-            for d1 in left:
-                for d2 in right:
-                    if d1+d2 <= distance:
-                        self.pairs +=1 
-            alldist = left + right
+            leftdist = bt(node.left)
+            rightdist = bt(node.right)
+            if leftdist and rightdist:
+                for d1 in leftdist:
+                    for d2 in rightdist:
+                        if d1+d2 <= distance:
+                            self.pairs+=1
+            alldist = leftdist + rightdist
             templist = []
-            for d in alldist:
-                templist.append(d+1)
+            for dist in alldist:
+                templist.append(dist+1)
             return templist
-            
-        trav(root)
-        # print(leafs)
-
+        bt(root)
 
         return self.pairs
-
-        
