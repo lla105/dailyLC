@@ -10,8 +10,8 @@ class Solution:
                         print(m[i][j], end=',  ')
                 print()
         m = matrix
-        printgrid(m)
-        print()
+        # printgrid(m)
+        # print()
         # minnums = []
         d = {} # format : { num: (i,j) }
         for i in range(len(m)):
@@ -23,7 +23,7 @@ class Solution:
                     ij = (i,j)
             d[lowest] = ij
 
-        print(d)
+        # print(d)
         result = []
         for num, ij in d.items():
             i = ij[0]
@@ -35,8 +35,3 @@ class Solution:
             if isLargest:
                 result.append(num)
         return result
-        return [99]
-        # 3,6
-        # 7,1
-        # 5,2
-        # 4,8
