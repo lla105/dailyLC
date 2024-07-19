@@ -20,9 +20,13 @@ class MedianFinder:
 
     def findMedian(self) -> float:
         if len(self.stack)%2 == 0 : # is even
-            v1 = self.stack[len(self.stack)//2]
-            v2 = self.stack[ (len(self.stack)//2) -1 ]
-            return (v1+v2)/2
+            # v1 = self.stack[len(self.stack)//2]
+            # v2 = self.stack[ (len(self.stack)//2) -1 ]
+            # return (v1+v2)/2
+            # print(self.stack, len(self.stack)//2 -1)
+            num1 = self.stack[ len(self.stack)//2 ]
+            num2 = self.stack[ (len(self.stack)//2) -1 ]
+            return (num1+num2)/2
         else:
             return self.stack[ len(self.stack)//2 ]
         return 99
