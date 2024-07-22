@@ -10,13 +10,13 @@ class Solution:
             return 0
         self.deepest = 0
 
-        def traverse(node, level):
+        def dfs(node, level):
             if not node:
                 return 0
-            self.deepest = max(self.deepest ,level)
-            left = traverse(node.left, level+1)
-            right = traverse(node.right, level+1)
-            return max(left,right)
-        traverse(root, 0)
+            self.deepest = max(self.deepest, level)
+            left = dfs(node.left, level+1)
+            right = dfs(node.right, level+1)
+            return 
 
+        dfs(root, 0)
         return self.deepest+1
