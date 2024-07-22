@@ -7,9 +7,12 @@ class Solution:
                 d[heights[i]].append(names[i])
             else:
                 d[heights[i]] = [names[i]]
-        print(d)
+        # print(d)
         result = []
-        for h in range(maxheight, -1 ,-1):
+        sortedheight = sorted( heights,reverse=True)
+        # print(sortedheight)
+        # for h in range(maxheight, -1 ,-1):
+        for h in sortedheight:
             for person in d[h]:
                 result.append(person)
 
