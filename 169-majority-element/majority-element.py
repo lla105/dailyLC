@@ -1,14 +1,13 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         d = {}
-        highest = 0
+        mostoccur = 0
+        mostint = 0
         for i in range(len(nums)):
-            d[nums[i]] = d.get(nums[i] , 0 ) + 1
+            num = nums[i]
+            d[num] = d.get(num, 0) + 1
+            if d.get(num) > mostoccur:
+                mostoccur = d.get(num)
+                mostint = num
 
-        print(d)
-        answer = 0
-        for i,v in d.items():
-            if highest < v:
-                highest = v
-                answer = i
-        return answer
+        return mostint
