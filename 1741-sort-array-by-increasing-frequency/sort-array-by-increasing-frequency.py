@@ -16,7 +16,9 @@ class Solution:
         # print(freq)
         result = []
         for frequency in freq:
-            sortedlist = sorted(dd[frequency] , reverse=True)
+            sortedlist = dd[frequency]
+            if len(dd[frequency])>1:
+                sortedlist = sorted(dd[frequency] , reverse=True)
             for num in sortedlist:
                 for _ in range(frequency):
                     result.append(num)
