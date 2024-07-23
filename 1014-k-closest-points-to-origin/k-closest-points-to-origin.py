@@ -1,46 +1,32 @@
+import math 
+
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-    
-        def getdistance(corrdinate):
-            x = corrdinate[0]
-            y = corrdinate[1]
-            x = x*x
-            y = y*y
-            temp = x+y
-            return sqrt(temp)
-        d = {} #format: { distance: corrdinates}
-        # d2 = {} # format: { distance: corrdinates}
-        keystack = []
-        for i in range(len(points)):
-            # print('-->', points[i])
-            # print(' = ', getdistance(points[i]))
-            temp = getdistance(points[i])
-            if temp in d:
-                d[temp].append(points[i])
-            else:
-                d[temp] = [points[i]]
-            # d2[temp] = points[i]
-
-            keystack.append(temp)
-
-        print(d)
-        print()
-        keystack = sorted(keystack)
-        print(keystack)
-        result = []
-        j=0 #index for keystack
-        while k>0:
-            key = keystack[j]
-            # print(">>", key, " - ", d[key])
-            # print("<<", len(d[key]))
-            keylength = 0
-            while len(d[key])>keylength:
-                # print("appending : ", d[key][keylength])
-                result.append(d[key][keylength])
-                # print(" result : ", result)
-                j+=1
-                k-=1
-                keylength += 1
-        print(" result : ", result)
+        def geteuc(points):
+            # points = [ (x,y) ]
+            x = points[0]
+            y = points[1]
+            xx = x*x
+            yy = y*y
+            tempsum = xx+yy
+            return math.sqrt(tempsum)
         
+        shortest = float('inf')
+        result = []
+        arr = []
+        for i in range(len(points)):
+            x = points[i][0]
+            y = points[i][1]
+            curdist = geteuc(points[i])
+            arr.append( (curdist, (x,y)))
+        print('arr > ', arr)
+        arr = sorted(arr, key=lambda x:x[0])
+        print('arr > ', arr)
+        
+        for i in range(len(arr)):
+            if k>0:
+                result.append(arr[i][1])
+            else:
+                return result
+            k-=1
         return result
