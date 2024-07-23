@@ -10,10 +10,10 @@ class Solution:
         for i,v in d.items():
             dd[v].append(i)
             freq.add(v)
-        print(d)
-        print(dd, freq)
+        # print(d)
+        # print(dd, freq)
         freq = sorted(freq)
-        print(freq)
+        # print(freq)
         result = []
         for frequency in freq:
             sortedlist = sorted(dd[frequency] , reverse=True)
