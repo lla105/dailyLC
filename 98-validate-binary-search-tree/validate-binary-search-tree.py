@@ -6,19 +6,16 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        self.answer = True
-        def bt(node, low, high):
+        self.isbalanced = True
+
+        def traverse(node, upper, lower):
             if not node:
-                return 
-            
-            bt(node.left, low, node.val)
-            bt(node.right, node.val, high)
-            if low < node.val < high:
-                pass
-            else:
-                self.answer = False
-                return
+                return None
+            if lower>=node.val or node.val>=upper:
+                self.isbalanced = False
+            left = traverse(node.left, node.val, lower)
+            right = traverse(node.right, upper, node.val)
+            return
 
-
-        bt(root,float('-inf') , float('inf'))
-        return self.answer
+        traverse(root, float('inf') , float('-inf'))
+        return self.isbalanced
