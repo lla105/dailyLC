@@ -14,4 +14,3 @@ class Solution:
             cur = cur.next
         mid = (length//2)+1
         return d[mid]
-        return cur
