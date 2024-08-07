@@ -1,16 +1,16 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         
-        result = []
+        resultlist = []
 
-        def bt(curList, available):
-            if len(curList)==len(nums):
-                result.append(curList)
+        def trav( curList , alist ):
+            if len(curList)>=len(nums):
+                resultlist.append(curList)
                 return
             
-            for i in range(len(available)):
-                nextavailable = available[:i]+available[i+1:]
-                bt(curList+[available[i]] , nextavailable)
-        bt([] , nums)
+            for i in range(len(alist)):
+                nextalist = alist[:i] + alist[i+1:]
+                trav( curList+[alist[i]] , nextalist )
 
-        return result
+        trav( [] , nums )
+        return resultlist
