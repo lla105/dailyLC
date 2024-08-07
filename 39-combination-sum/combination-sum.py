@@ -1,14 +1,21 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        resultlist = []
-        c = candidates
-        def dfs( curList , index ):
-            if sum(curList)>target:
+            
+        res = []
+
+        def make_combination(idx, comb, total):
+            if total == target:
+                res.append(comb[:])
                 return
-            if sum(curList)==target:
-                resultlist.append( tuple(curList) )
+            
+            if total > target or idx >= len(candidates):
                 return
-            for i in range(index, len(c) ):
-                dfs( curList+[c[i]] , i)
-        dfs([], 0)
-        return resultlist
+            
+            comb.append(candidates[idx])
+            make_combination(idx, comb, total + candidates[idx])
+            comb.pop()
+            make_combination(idx+1, comb, total)
+
+            return res
+
+        return make_combination(0, [], 0)
