@@ -7,22 +7,36 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if not root:
-            return None
+        self.middleAncestor = None
+        self.pnode = None
+        self.qnode = None
 
-        def bt(node):
+        def dfs( node ):
             if not node:
-                return None
-            if node.val==p.val or node.val==q.val:
-                return node
-            
-            left = bt(node.left)
-            right = bt(node.right)
+                return False
+            if node.val == p.val:
+                print(' found p : ', p.val)
+                self.pnode = node
+                return True
+            if node.val == q.val:
+                print(' found q : ', q.val)
+                self.qnode = node
+                return True
+            left = dfs(node.left)
+            right = dfs(node.right)
             if left and right:
-                return node
-            if left:
-                return left
-            if right:
-                return right
-
-        return bt(root)
+                self.middleAncestor = node
+                return False
+            if left and not right:
+                return True
+            if right and not left :
+                return True
+            if not right and not left:
+                return False
+        dfs(root)
+        if self.middleAncestor:
+            return self.middleAncestor
+        elif self.pnode:
+            return self.pnode
+        elif self.qnode:
+            return self.qnode
