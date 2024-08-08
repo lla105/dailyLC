@@ -7,20 +7,27 @@ class Solution:
         ones = 0
         twos = 0
         for i in range(len(nums)):
-            if nums[i] == 0:
+            z = nums[i]
+            if z==0:
                 zeros+=1
-            if nums[i] == 1:
-                ones+=1 
-            if nums[i] == 2:
-                twos += 1
-        index = 0
+            if z==1:
+                ones+=1
+            if z==2:
+                twos+=1
+        result = []
+        print(zeros,ones,twos)
+        print(result)
+        for i in range(zeros):
+            result.append(0)
+        print(result)
+
+        for i in range(ones):
+            result.append(1)
+        print(result)
+
+        for i in range(twos):
+            result.append(2)
+        print(result)
         for i in range(len(nums)):
-            if zeros>0:
-                nums[i]= 0
-                zeros-=1
-            elif ones>0:
-                nums[i]=1
-                ones-=1
-            elif twos>0:
-                nums[i]=2
-                twos-=1
+            nums[i] = result[i]
+        return result
