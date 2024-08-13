@@ -1,16 +1,17 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        tempsum = sum(nums)
-        target = tempsum // 2
-        if tempsum%2!=0:
+        totalsum = sum(nums)
+        target = totalsum /2
+        if totalsum%1 != 0:
             return False
-        self.isPossible = False
-        dp = [False] * (target+1 )
+        if target%1 != 0:
+            return False
+        target = int(target)
+        dp = [False] * ( int(target) +1)
         dp[0] = True
 
         for num in nums:
             for i in range(target, num-1, -1):
                 dp[i] = dp[i] or dp[i-num]
-        print(dp)
 
         return dp[target]
