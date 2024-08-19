@@ -1,23 +1,19 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        
-
-
-        arrsum = sum(nums)
-        t = arrsum//2
-        # print( ' ta?rget : ', t)
-        dp = [False] * ( t +1 )
-        dp[0] = True
-        # print(11.1%1 )
-        # print(11%1)
-        if (arrsum/2)%1!=0:
+        totalsum = sum(nums)
+        half = totalsum / 2
+        print( ' half : ', half)
+        if half%1 != 0:
             return False
+        target = totalsum // 2
 
-        for num in nums:
-            for i in range( t, -1, -1) :
-                # print( num, i)
-                if i>=num and dp[i-num]:
-                    dp[i] = True
-                    # print(dp)
+        dp = [ False ] * (target + 1)
+        dp[0] = True
+        print( ' target : ', target)
+        for num in nums :
+            for i in range(target , -1, -1 ):
+                if  i+num<len(dp) and dp[i] :
+                    dp[i+num] = True
+        print(dp)
 
         return dp[-1]
