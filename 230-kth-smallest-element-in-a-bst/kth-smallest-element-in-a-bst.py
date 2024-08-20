@@ -19,8 +19,8 @@ class Solution:
         heapq.heapify(self.nums)
         count= 0
         while count < k-1 :
-            print(self.nums)
+            # print(self.nums)
             heapq.heappop(self.nums)
             count+=1
-        print(self.nums)
+        # print(self.nums)
         return self.nums[0]
