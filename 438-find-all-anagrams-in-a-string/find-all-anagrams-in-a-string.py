@@ -1,47 +1,24 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        sdic = {}
-        pdic = {}
-        for i in range(len(p)):
-            pdic[p[i]] = pdic.get(p[i], 0) + 1
-        # print(pdic)
-        result = []
-        sdic = {}
-        stack = deque()
-        for i in range(len(s)):
-            if i < len(p) - 1:
-                stack.append(s[i])
-                sdic[s[i]] = sdic.get(s[i], 0 ) + 1
-                continue
-
-            sdic[s[i]] = sdic.get(s[i], 0 ) + 1
-            stack.append(s[i])
-            # print(sdic, stack)
-            # compare
-            matches = True
-            for char, count in pdic.items():
-                if sdic.get(char) != count:
-                    matches = False
-            if matches :
-                result.append(i-len(p)+1)
-            temp = stack.popleft()
-            # print('removing : ', sdic.pop(temp) )
-            if temp in sdic and sdic.get(temp) > 1:
-                sdic[temp] -= 1
+        self.pdic = Counter(p)
+        self.sdic = Counter(s[0:len(p)])
+        # del self.sdic['c']
+        self.result = []
+        if self.pdic == self.sdic:
+            self.result.append(0)
+        for i in range(len(p), len(s)):
+            lastchar = s[i-len(p)]
+            # print(i)
+            # print(' last char : ' , lastchar)
+            if self.sdic.get(lastchar) > 1:
+                self.sdic[lastchar] -= 1
             else:
-                sdic.pop(temp)
+                del self.sdic[s[i-len(p)]]
 
-        return result
-        # result = []
-        # p = sorted(p)
-        # for i in range(len(s)-len(p)+1):
-        #     temps = ''.join(sorted(s[i:i+len(p)]))
-        #     # print(s[i:i+len(p)], temps)
-        #     count = 0
-        #     for j in range(len(p)):
-        #         if temps[j] == p[j]:
-        #             count+=1
-        #     if count == len(p):
-        #         result.append(i)
 
-        # return result
+            self.sdic[s[i]] = self.sdic.get(s[i] , 0) + 1
+            if self.pdic == self.sdic:
+                # print( ' MATCH ')
+                self.result.append(i-len(p)+1 )
+        return self.result
+
