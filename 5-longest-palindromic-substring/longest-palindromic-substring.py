@@ -1,29 +1,30 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        
-        maxsubstring = ''
-        # for odd substrings palindromes
+        longest = [ '' ]
         for i in range(len(s)):
+            # print( i)
+            #odd palindromes
             l = i
             r = i
             while l>=0 and r<len(s) and s[l]==s[r]:
-                cursubstring = s[l:r+1]
-                if len(cursubstring) >= len(maxsubstring):
-                    maxsubstring = cursubstring
-                
+                # print(len(s[l:r+1]) ,  ' vs ', len(longest[-1]))
+                if len(s[l:r+1]) > len(longest[-1]) :
+                    longest.append(s[l:r+1])
+                    # print(s[l:r+1], l, r)
+
                 l-=1
                 r+=1
 
-        # for even substrings palindromes
-        for i in range(len(s)-1):
-            l = i
-            r = i+1
+            #even palindromes
+            l=i
+            r=i+1
             while l>=0 and r<len(s) and s[l]==s[r]:
-                cursubstring = s[l:r+1]
-                if len(cursubstring) >= len(maxsubstring):
-                    maxsubstring = cursubstring
-                
+                if len(s[l:r+1]) > len(longest[-1]) :
+                    longest.append(s[l:r+1])
+                    # print(s[l:r+1], l, r)
+
                 l-=1
                 r+=1
+        # print(longest)
 
-        return maxsubstring
+        return longest[-1]
