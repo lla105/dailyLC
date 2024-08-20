@@ -1,38 +1,41 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        if not word:
-            return True
-        self.isTrue = False
-        def bfs(board,i,j,index):
-            if index == len(word):
-                self.isTrue = True
-                return
-            if i<0 or j<0 or i>=len(board) or j>=len(board[0]):
-                return 
-            if index >= len(word):
-                return
-            if board[i][j] != word[index] :
-                return
-            temp = board[i][j]
-            board[i][j] = '#'
-            # visited.add( (i,j) )
-            bfs(board,i+1,j,index+1)
-            bfs(board,i,j+1,index+1)
-            bfs(board,i-1,j,index+1)
-            bfs(board,i,j-1,index+1)
-            board[i][j] = temp
+        self.result = False
+        m = len(board)
+        n = len(board[0])
+        def printboard(board):
             return
-        #find starts
-        startlist = []
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if board[i][j] == word[0]:
-                    startlist.append( (i,j) )
-        # bfs from each start node
-        newboard = board
-        for i,j in startlist:
-            # visited = set()
-            bfs(board,i,j,0)
-        return self.isTrue
+            # for i in range(m):
+            #     for j in range(n):
+            #         print(board[i][j], end=' ')
+            #     print()
+            # print()
 
-            
+        def bfs( curList, index , i, j):
+            if len(curList) == len(word):
+                # print( ' FOUND IT ')
+                self.result = True
+                return
+            if i<0 or j<0 or i>=m or j>=n:
+                return
+            if board[i][j] == '#' or board[i][j] != word[index]:
+                return
+            OGchar = board[i][j]
+            board[i][j] = '#'
+            printboard(board)
+            bfs( curList+[OGchar] , index+1, i+1,j)
+            bfs( curList+[OGchar] , index+1, i-1,j)
+            bfs( curList+[OGchar] , index+1, i,j+1)
+            bfs( curList+[OGchar] , index+1, i,j-1)
+
+            board[i][j] = OGchar
+            return
+
+        if not word:
+            self.result
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == word[0]:
+                    bfs( [] , 0 , i,j)
+        return self.result
