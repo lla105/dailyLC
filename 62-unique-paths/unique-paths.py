@@ -1,21 +1,27 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        dp = []
-        temp = []
+        grid = []
+        for i in range(m):
+            row = [0] * n
+            grid.append(row)
+        def printgrid(grid):
+            return
+            # for i in range(m):
+            #     for j in range(n):
+            #         print(grid[i][j] , end=',')
+            #     print()
         for i in range(m):
             for j in range(n):
-                if j==0:
-                    temp.append(1)
-                elif i==0:
-                    temp.append(1)
-                else:
-                    temp.append(0)
-            dp.append(temp)
-            temp = []
-
+                if i==0:
+                    grid[i][j] = 1
+                grid[i][0] = 1
+        printgrid(grid)
+        print()
         for i in range(1, m):
-            for j in range(1, n):
-                dp[i][j] = dp[i-1][j] + dp[i][j-1]
-        for each in dp:
-            print(each)
-        return dp[-1][-1]
+            for j in range(1,n):
+                grid[i][j] = grid[i-1][j] + grid[i][j-1]
+
+        printgrid(grid)
+
+
+        return grid[-1][-1]
