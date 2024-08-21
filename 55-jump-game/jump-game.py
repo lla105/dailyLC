@@ -1,11 +1,15 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        gas = 0
+        gas = nums[0]
+        spot = 0
+        while gas > 0 and spot<len(nums):
+            gas -= 1
+            spot += 1
+            if spot>=len(nums)-1:
+                return True
+            gas = max(gas, nums[spot])
 
-        for i in range(len(nums)):
-            if gas < 0:
-                return False
-            elif gas < nums[i]:
-                gas = nums[i]
-            gas-=1
-        return True
+        if spot>=len(nums)-1:
+            return True
+        else:
+            return False
