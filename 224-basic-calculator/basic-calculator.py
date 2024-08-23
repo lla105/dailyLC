@@ -16,7 +16,7 @@ class Solution:
                 num = num*10 + int(c)
             elif c in '+-':
                 result += (num*sign)
-                sign = -1 if c == '-' else 1
+                sign =  getsign(c)
                 num = 0
             elif c=='(':
                 stack.append(result)
