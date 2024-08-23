@@ -1,53 +1,54 @@
-class LinkedNode:
-    def __init__(self, key = -1, val = -1):
-        self.key = key
-        self.val = val
-        self.prev = None
-        self.next = None
-
 class LRUCache:
+    class Node:
+        def __init__(self, key, value):
+            self.key = key 
+            self.value = value
+            self.next = None
+            self.tail = None
+
     def __init__(self, capacity: int):
-        self.capacity = capacity
-        self.cache = dict()
-        self.head = LinkedNode()
-        self.tail = LinkedNode()
+        self.cap = capacity
+        self.usage = 0
+        self.d = {} # format : { key:Node(val) }
+        self.head = self.Node(-11,-11)
+        self.tail = self.Node(-99,-99)
         self.head.next = self.tail
         self.tail.prev = self.head
-        
+
     def get(self, key: int) -> int:
-        if key not in self.cache:
+        if key not in self.d:
             return -1
-        
-        node = self.__evict(key)
-        self.__addToEnd(node)
-        return node.val
+        node = self.d[key]
+        self.deleteNode(node)
+        self.addToBack(node)
+        return node.value
 
     def put(self, key: int, value: int) -> None:
-        if key in self.cache:
-            node = self.__delete(key)
-
-        node = LinkedNode(key, value)
-        self.cache[key] = node
-        self.__addToEnd(node)
-        
-        if len(self.cache) > self.capacity:
-            self.__delete(self.head.next.key)
-    
-    def __evict(self, key) -> LinkedNode: 
-        node = self.cache[key]
-        node.prev.next = node.next
-        node.next.prev = node.prev
-        node.next = None
-        node.prev = None
-        return node
-
-    def __delete(self, key) -> None:
-        deleteNode = self.__evict(key)
-        del deleteNode
-        del self.cache[key]
-
-    def __addToEnd(self, node) -> None:
-        node.prev = self.tail.prev
+        if key in self.d:
+            node = self.d[key]
+            node.value = value
+            self.deleteNode(node)
+            self.addToBack(node)
+        else:
+            if len(self.d) == self.cap:
+                # Remove the least recently used (LRU) node
+                rmnode = self.head.next
+                self.deleteNode(rmnode)
+                del self.d[rmnode.key]
+            # Add the new node
+            newNode = self.Node(key, value)
+            self.d[key] = newNode
+            self.addToBack(newNode)
+    def addToBack(self, node):
         node.next = self.tail
         self.tail.prev.next = node
+        node.prev = self.tail.prev
         self.tail.prev = node
+    def deleteNode(self, node):
+        node.prev.next = node.next
+        node.next.prev = node.prev
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
