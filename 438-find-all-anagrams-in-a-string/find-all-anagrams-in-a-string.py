@@ -1,22 +1,21 @@
-from collections import Counter
-
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        pdic = Counter(p)
-        sdic = Counter(s[:len(p)])
+        pcount = Counter(p)
+        scount = Counter(s[:len(p)])
+
         result = []
-        
-        if pdic == sdic:
+        l = 0
+        if scount == pcount:
             result.append(0)
-        
-        for i in range(len(p), len(s)):
-            sdic[s[i]] += 1
-            sdic[s[i - len(p)]] -= 1
             
-            if sdic[s[i - len(p)]] == 0:
-                del sdic[s[i - len(p)]]
-                
-            if pdic == sdic:
-                result.append(i - len(p) + 1)
-        
+        for r in range(len(p) , len(s)):
+            scount[s[r]] = scount.get(s[r],0) + 1
+            scount[s[l]] -= 1
+
+            if scount[s[l]] == 0:
+                scount.pop(s[l])
+            l+=1
+            if scount == pcount : 
+                result.append(l)
+
         return result
