@@ -1,19 +1,19 @@
 class LRUCache:
-    class Node:
-        def __init__(self, key, value):
-            self.key = key 
-            self.value = value
+    class ListNode:
+        def __init__(self, key, val):
+            self.key = key
+            self.val = val
             self.next = None
-            self.tail = None
+            self.prev = None
 
     def __init__(self, capacity: int):
         self.cap = capacity
         self.usage = 0
-        self.d = {} # format : { key:Node(val) }
-        self.head = self.Node(-11,-11)
-        self.tail = self.Node(-99,-99)
+        self.head = self.ListNode(-11,-11)
+        self.tail = self.ListNode(-99,-99)
         self.head.next = self.tail
         self.tail.prev = self.head
+        self.d = {} # format = { key:ListNode()}
 
     def get(self, key: int) -> int:
         if key not in self.d:
@@ -21,12 +21,12 @@ class LRUCache:
         node = self.d[key]
         self.deleteNode(node)
         self.addToBack(node)
-        return node.value
+        return node.val
 
-    def put(self, key: int, value: int) -> None:
+    def put(self, key: int, val: int) -> None:
         if key in self.d:
             node = self.d[key]
-            node.value = value
+            node.val = val
             self.deleteNode(node)
             self.addToBack(node)
         else:
@@ -36,7 +36,7 @@ class LRUCache:
                 self.deleteNode(rmnode)
                 del self.d[rmnode.key]
             # Add the new node
-            newNode = self.Node(key, value)
+            newNode = self.ListNode(key, val)
             self.d[key] = newNode
             self.addToBack(newNode)
     def addToBack(self, node):
@@ -44,9 +44,18 @@ class LRUCache:
         self.tail.prev.next = node
         node.prev = self.tail.prev
         self.tail.prev = node
+
     def deleteNode(self, node):
         node.prev.next = node.next
         node.next.prev = node.prev
+# EG1:
+# 1,2,3, cap = 3
+# 1,2,3,4
+# H,1,3,4,2,T
+# put(1,11), put(2,22), put(3,33)
+# d1 = {1:11 , 2:22, ...}
+# d1 = format = { key:NodeList(key, value)}
+# 1,3,4,2,5,T
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
