@@ -1,13 +1,12 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        resultset = []
+        self.result = set()
 
         def bf( curList , index ):
-            # resultset.add( tuple(curList) )
-            resultset.append( tuple(curList) )
-
-            for i in range( index, len(nums)):
+            self.result.add( tuple(curList) )
+            if len(curList)>=len(nums):
+                return
+            for i in range(index, len(nums)):
                 bf( curList+[nums[i]] , i+1)
-
         bf([], 0)
-        return resultset
+        return self.result
