@@ -11,7 +11,9 @@ class Solution:
 
         for num in nums:
             for i in range( target, -1, -1 ):
-                if i+num<len(dp) and dp[i]:
-                    dp[i+num] = True
+                if i>=num and dp[i-num]:
+                    dp[i] = True
+                # if i+num<len(dp) and dp[i]:
+                #     dp[i+num] = True
         print(dp)
         return dp[-1]
