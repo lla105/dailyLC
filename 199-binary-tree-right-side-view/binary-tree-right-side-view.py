@@ -6,13 +6,15 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
         self.d = {} # format : { level1:val1, level2:val2, ...}
         def trav( node , level ) :
-            if not node:
-                return 
             self.d[level] = node.val
-            trav(node.left, level+1)
-            trav(node.right, level+1)
+            if node.left:
+                trav(node.left, level+1)
+            if node.right:
+                trav(node.right, level+1)
 
         trav( root, 0 )
         # print(self.d)
