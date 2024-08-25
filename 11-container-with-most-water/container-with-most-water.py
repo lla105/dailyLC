@@ -1,15 +1,14 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        maxwater = 0
+        h = height
         l = 0
-        r = len(height) - 1
-
+        r = len(h)-1
+        most = float('-inf')
         while l<r:
-            curh = min(height[l] , height[r])
-            curw = r-l
-            maxwater = max(curh*curw , maxwater)
-            if height[l] > height[r] : 
-                r-=1
+            lowerheight = min(h[l] , h[r])
+            most = max(most, lowerheight*(abs(l-r)))
+            if h[l] > h[r] :
+                r -= 1
             else:
-                l+=1
-        return maxwater
+                l += 1
+        return most
