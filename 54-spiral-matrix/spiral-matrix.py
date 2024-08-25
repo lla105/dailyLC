@@ -13,7 +13,6 @@ class Solution:
         while len(path) < m*n:
             # right 
             while j < n and (i,j) not in visited:
-                print(i,j)
                 path.append(mat[i][j])
                 visited.add( (i,j) )
                 j+=1
@@ -21,7 +20,6 @@ class Solution:
             j-=1
             #down
             while i < m and (i,j) not in visited:
-                print(i,j)
                 path.append(mat[i][j])
                 visited.add( (i,j) )
                 i+=1
@@ -29,7 +27,6 @@ class Solution:
             j-=1
             #left
             while j>=0 and (i,j) not in visited:
-                print(i,j)
                 path.append(mat[i][j])
                 visited.add( (i,j) )
                 j-=1
@@ -37,7 +34,6 @@ class Solution:
             i-=1
             #up
             while i>=0 and (i,j) not in visited:
-                print(i,j)
                 path.append(mat[i][j])
                 visited.add( (i,j) )
                 i-=1
