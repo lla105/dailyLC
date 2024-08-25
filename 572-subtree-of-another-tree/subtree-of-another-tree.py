@@ -6,37 +6,34 @@
 #         self.right = right
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        if not root:
+            return False
         def findsubroot(node):
             if not node:
-                return
+                return None
             if node.val == subRoot.val:
-                print('found root :', node.val)
-                self.subrootnodes.append(node)
-                # return 
-            findsubroot(node.left)
-            findsubroot(node.right)
-
-        def isSameTree(p, q):
-            if not p and not q:
+                self.samenodes.append(node)
+            left = findsubroot(node.left)
+            right = findsubroot(node.right)
+            if left: return left
+            if right: return right
+            return None
+        
+        def issubtree(node,subRoot):
+            if not node and not subRoot:
                 return True
-            if p and q and p.val==q.val:
-                isSameTree(p.left, q.left)
-                isSameTree(p.right, q.right)
-                return 
-            self.issubtree = False
-            return False
-
-        self.subrootnodes = []
-        findsubroot(root)
-        # print(self.subrootnodes)
-        for node in self.subrootnodes:
-            self.issubtree = True
-            print('node : ', node.val)
-            isSameTree( node, subRoot)
-            if self.issubtree == True:
+            if (node and not subRoot) or (subRoot and not node):
+                return False
+            if node.val == subRoot.val:
+                return issubtree(node.left , subRoot.left) and issubtree(node.right, subRoot.right)
+            else:
+                return False
+        self.samenodes = []
+        rootnode = findsubroot(root)
+        print(rootnode)
+        for startnode in self.samenodes:
+            if issubtree(startnode, subRoot):
                 return True
-        # isSameTree(self.subrootnode ,subRoot)
-        if not self.subrootnodes:
-            return False
-        else:
-            return self.issubtree
+        return False
+
+        return root
