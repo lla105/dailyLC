@@ -7,13 +7,17 @@
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         self.longest = 0
-        def backtrack(node):
+
+        def trav( node ) :
             if not node:
                 return 0
-            left = backtrack(node.left)
-            right = backtrack(node.right)
+            left = trav(node.left)
+            right = trav(node.right)
             self.longest = max(self.longest, left+right)
-            longerpath = max(left, right)
-            return longerpath + 1
-        backtrack(root)
+            if left > right:
+                return left+1
+            else:
+                return right +1
+        trav(root)
+
         return self.longest
