@@ -6,24 +6,15 @@
 #         self.right = right
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        self.isSame = True
-        def trav(p,q):
-                if p is None and q is None:
-                    return
-                if p is None and q:
-                    self.isSame = False
-                    return 
-                if q is None and p:
-                    self.isSame = False
-                    return
-                if q.val != p.val:
-                    self.isSame = False
-                    return
-                print(' calling left from ', p.val, q.val)
-                trav(p.left, q.left)
-                print(' calling right from ', p.val, q.val)
-                trav(p.right, q.right)
-
-                return
-        trav(p,q)
-        return self.isSame
+        self.balanced = True
+        def trav( node1, node2 ):
+            if not node1 and not node2:
+                return True
+            if node1 and node2 and node1.val==node2.val:
+                left = trav(node1.left, node2.left)
+                right = trav(node1.right, node2.right)
+            else:
+                self.balanced = False 
+        trav( p , q)
+        return self.balanced
+            
