@@ -23,7 +23,6 @@ class Solution:
                 num = 0
             elif c== ')':
                 insidesum = cursum + (sign*num)
-                print(' inside sum : ', insidesum)
                 oldsum , oldsign = stack.pop()
                 cursum = oldsum + (oldsign*insidesum)
                 num = 0
