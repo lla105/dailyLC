@@ -15,7 +15,6 @@ class Solution:
             right = trav(node.right)
             return
         trav(root)
-        print(arr)
         heapq.heapify(arr)
         count = 0
         while count+1 < k:
