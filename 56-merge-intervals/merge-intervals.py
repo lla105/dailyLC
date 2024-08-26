@@ -1,7 +1,7 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         # intervals = sorted( intervals, lambda=x x:x[0])
-        intervals = sorted(intervals)
+        intervals =sorted(intervals, key=lambda x:x[0])
         stack = []
 
         for i in range(len(intervals)):
