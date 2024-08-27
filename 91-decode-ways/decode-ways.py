@@ -13,11 +13,12 @@ class Solution:
         # Fill the dp array
         for i in range(2, n + 1):
             # Single digit decode is valid (1-9)
-            if s[i - 1] != '0':
+            j = i-1
+            if s[j] != '0':
                 dp[i] += dp[i - 1]
             
             # Two digit decode is valid (10-26)
-            if 10 <= int(s[i - 2:i]) <= 26:
+            if 10 <= int(s[j-1:j+1]) <= 26:
                 dp[i] += dp[i - 2]
 
         # The answer is the number of ways to decode the entire string
