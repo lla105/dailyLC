@@ -1,25 +1,24 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
-        if not s or s[0]=='0':
+        # Edge case: empty string or starting with '0' can't be decoded
+        if not s or s[0] == '0':
             return 0
-        dp = [0] * (len(s)+1)
-        dp[0] = 1
-        dp[1] = 1
-        #nums= [ ,1,2,3,0]
-        # dp = [1,1,0,0,0]
+        
+        # Initialize dp array
+        n = len(s)
+        dp = [0] * (n + 1)
+        dp[0] = 1  # Base case: an empty string has one way to be decoded
+        dp[1] = 1  # A valid single character string has one way to be decoded
 
-        # if cur num is not 0, i-1 + i-2
-        for i in range(2, len(dp)):
-            # print(s)
-            # dp[i] = 99
-            prev1Digit = int(s[i-1])
-            prev2Digits = int(s[i-2:i])
+        # Fill the dp array
+        for i in range(2, n + 1):
+            # Single digit decode is valid (1-9)
+            if s[i - 1] != '0':
+                dp[i] += dp[i - 1]
+            
+            # Two digit decode is valid (10-26)
+            if 10 <= int(s[i - 2:i]) <= 26:
+                dp[i] += dp[i - 2]
 
-            if prev1Digit!=0:
-                dp[i] += dp[i-1]
-            if 10<=prev2Digits<=26:
-                dp[i] += dp[i-2]
-
-
-        print(dp)
-        return dp[-1]
+        # The answer is the number of ways to decode the entire string
+        return dp[n]
