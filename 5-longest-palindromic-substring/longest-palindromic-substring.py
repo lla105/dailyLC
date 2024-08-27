@@ -1,30 +1,27 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        longest = [ '' ]
+        
+        maxlen = 0
+        maxstring = ''
+
         for i in range(len(s)):
-            # print( i)
-            #odd palindromes
-            l = i
-            r = i
-            while l>=0 and r<len(s) and s[l]==s[r]:
-                # print(len(s[l:r+1]) ,  ' vs ', len(longest[-1]))
-                if len(s[l:r+1]) > len(longest[-1]) :
-                    longest.append(s[l:r+1])
-                    # print(s[l:r+1], l, r)
-
-                l-=1
-                r+=1
-
-            #even palindromes
+            #even 
             l=i
             r=i+1
             while l>=0 and r<len(s) and s[l]==s[r]:
-                if len(s[l:r+1]) > len(longest[-1]) :
-                    longest.append(s[l:r+1])
-                    # print(s[l:r+1], l, r)
-
+                if maxlen < len(s[l:r+1]) :
+                    maxlen = len(s[l:r+1])
+                    maxstring = s[l:r+1]
                 l-=1
                 r+=1
-        # print(longest)
-
-        return longest[-1]
+            
+            #odd
+            l=i
+            r=i
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                if maxlen < len(s[l:r+1]):
+                    maxlen = len(s[l:r+1])
+                    maxstring = s[l:r+1]
+                l-=1
+                r+=1
+        return maxstring
