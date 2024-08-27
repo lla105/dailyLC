@@ -10,20 +10,18 @@ class Solution:
             '8':'tuv',
             '9':'wxyz'
         }
-        self.result = []
-        def bf(curList , index):
-            if len(curList) == len(digits) and curList:
-                self.result.append( ''.join(curList) )
-            for i in range(index , len(digits)):
-                digit = digits[i]
-                if digit in self.d:
-                    chars = self.d[digit]
-                    for char in chars:
-                        bf( curList+[char] , i+1)
+        result = []
+        if not digits:
+            return result
+        def bf( curList , index) :
+            if len(curList) == len(digits):
+                result.append( ''.join(curList) )
+            for i in range( index, len(digits)):
+                if digits[i] not in self.d:
+                    continue
+                letters = self.d[digits[i]]
+                for char in letters:
+                    bf( curList+[char] , i+1 )
+        bf( [] , 0)
 
-        bf([], 0)
-        return self.result
-        # for digit in digits:
-        #     if digit in self.d:
-        #         chars = self.d[digit]
-        #         for char in chars:
+        return result
