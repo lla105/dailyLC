@@ -13,10 +13,10 @@ class Solution:
         dp = [0] * (n + 1)
         dp[0] = 1  # Base case: an empty string has one way to be decoded
         dp[1] = 1  # A valid single character string has one way to be decoded
-        print(dp)
+        # print(dp)
         for i in range(2, n + 1):
             j = i-1
-            print('====== ', s[j] )
+            # print('====== ', s[j] )
             if (s[j]=='0' ) :
                 if 10<=int(s[j-1:j+1])<=26:
                     dp[i] = dp[i-2]
@@ -28,7 +28,7 @@ class Solution:
                     dp[i] = dp[i-1] + dp[i-2]
                 else:
                     dp[i] = dp[i-1]
-            else:
-                print( ' ELSE !!!')
-            print(dp)
+            # else:
+            #     print( ' ELSE !!!')
+            # print(dp)
         return dp[n]
