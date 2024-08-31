@@ -6,6 +6,7 @@ class Solution:
         for _ in range(n - 1):
             updated = False
             for i, (u, v) in enumerate(edges):
+                print(i,u,v)
                 if dist[u] * succProb[i] > dist[v]:
                     dist[v] = dist[u] * succProb[i]
                     updated = True
