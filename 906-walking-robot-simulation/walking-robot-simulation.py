@@ -35,5 +35,5 @@ class Solution:
             
             distance = getdistance( position[0] , position[1] )
             maxdist = max(maxdist, distance)
-        print(position)
+        # print(position)
         return maxdist
