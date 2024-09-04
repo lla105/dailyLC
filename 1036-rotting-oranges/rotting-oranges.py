@@ -1,31 +1,32 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        freshcount = 0
-        rottencellsQ = deque()
+        rottenq = deque() 
+        fresh = 0 
+        minutespassed = 0
         for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j]==1:
-                    freshcount +=1
+            for j in range(len(grid[0])) :
                 if grid[i][j] == 2:
-                    rottencellsQ.append( (i,j) )
-        minutepassed = 0
-        directions = [ (0,1),(0,-1), (1,0), (-1,0) ]
-        while freshcount and rottencellsQ:
-            minutepassed += 1
-            for _ in range(len(rottencellsQ)):
-                x,y = rottencellsQ.popleft()
+                    rottenq.append( (i,j) )
+                elif grid[i][j] == 1:
+                    fresh += 1
+        directions = [ (1,0), (0,1), (-1,0), (0,-1) ]
+        while rottenq and fresh :
+            minutespassed += 1
+            for _ in range(len(rottenq)):
+                x,y = rottenq.popleft()
                 for dx,dy in directions:
                     i = x+dx
                     j = y+dy
                     if i<0 or j<0 or i>=len(grid) or j>=len(grid[0]):
                         continue
-                    if grid[i][j]!=1:
+                    if grid[i][j] != 1:
                         continue
-                    rottencellsQ.append( (i,j) )
+                    fresh -= 1
                     grid[i][j] = 2
-                    freshcount -= 1
-        
-        if freshcount >0:
-            return -1
+                    rottenq.append( (i,j) )
+        print(fresh , minutespassed)
+
+        if fresh==0:
+            return minutespassed
         else:
-            return minutepassed
+            return -1
