@@ -3,7 +3,7 @@ class Solution:
         i = 0
         j = 0
         arr = []
-        while i<len(nums1) and j<len(nums2):
+        while i<len(nums1) and j<len(nums2) and len(arr)< (((len(nums1)) + len(nums2))//2)+1:
             if nums1[i] > nums2[j] :
                 arr.append(nums2[j])
                 j+=1
