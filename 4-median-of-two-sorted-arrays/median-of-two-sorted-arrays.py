@@ -1,32 +1,25 @@
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        i, j = 0, 0
-        merged = []
-        total_len = len(nums1) + len(nums2)
-        median_pos = total_len // 2
-        
-        # Merge arrays only until we reach the middle point
-        while i < len(nums1) and j < len(nums2) and len(merged) <= median_pos:
-            if nums1[i] <= nums2[j]:
-                merged.append(nums1[i])
-                i += 1
+        i = 0
+        j = 0
+        arr = []
+        while i<len(nums1) and j<len(nums2) and len(arr)< (((len(nums1)) + len(nums2))//2)+1:
+            if nums1[i] > nums2[j] :
+                arr.append(nums2[j])
+                j+=1
             else:
-                merged.append(nums2[j])
-                j += 1
-        
-        # Append remaining elements from nums1 if needed, only until median position
-        while i < len(nums1) and len(merged) <= median_pos:
-            merged.append(nums1[i])
-            i += 1
-        
-        # Append remaining elements from nums2 if needed, only until median position
-        while j < len(nums2) and len(merged) <= median_pos:
-            merged.append(nums2[j])
-            j += 1
-        
-        # If total length is odd, return the middle element
-        if total_len % 2 == 1:
-            return merged[median_pos]
+                arr.append(nums1[i])
+                i+=1
+        while i<len(nums1):
+            arr.append(nums1[i])
+            i+=1
+        while j<len(nums2):
+            arr.append(nums2[j])
+            j+=1
+
+        if len(arr)%2==0:
+            m1 = arr[len(arr)//2]
+            m2 = arr[ (len(arr)//2) - 1]
+            return (m1+m2)/2
         else:
-            # If total length is even, return the average of the two middle elements
-            return (merged[median_pos] + merged[median_pos - 1]) / 2
+            return arr[len(arr)//2]
