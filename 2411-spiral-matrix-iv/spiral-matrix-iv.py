@@ -1,58 +1,27 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def spiralMatrix(self, m: int, n: int, head: Optional[ListNode]) -> List[List[int]]:
-        grid = []
-        for i in range(m):
-            row = [ -1 ] * n
-            grid.append(row)
-        # def printgrid( somegrid):
-        #     for i in range(len(somegrid)):
-        #         for j in range(len(somegrid[0])):
-        #             print(somegrid[i][j], end=' ')
-        #         print()
-        # printgrid( grid)
-
-        i=0
-        j=0
-        visited = set()
+        # Initialize the grid with -1
+        grid = [[-1] * n for _ in range(m)]
         
+        # Direction vectors: right, down, left, up
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        current_dir = 0  # Start moving right
+        
+        i, j = 0, 0  # Starting position
         while head:
-            # right 
-            while j<n and (i,j) not in visited and head:
-                grid[i][j] = head.val
-                head = head.next
-                visited.add( (i,j) )
-                j+=1
-            j-=1
-            i+=1
-            # down
-            while i<m and (i,j) not in visited and head:
-                grid[i][j] = head.val
-                head = head.next
-                visited.add( (i,j) )
-                i+=1
-            i-=1
-            j-=1
-            #left
-            while j>=0 and (i,j) not in visited and head:
-                grid[i][j] = head.val
-                head = head.next
-                visited.add( (i,j) )
-                j-=1
-            j+=1
-            i-=1
-            # up 
-            while i>=0 and (i,j) not in visited and head:
-                grid[i][j] = head.val
-                head = head.next
-                visited.add( (i,j) )
-                i-=1
-            i+=1 
-            j+=1
-        return grid
-
+            grid[i][j] = head.val
+            head = head.next
+            
+            # Compute the next position
+            next_i, next_j = i + directions[current_dir][0], j + directions[current_dir][1]
+            
+            # Check if the next position is out of bounds or already filled
+            if not (0 <= next_i < m and 0 <= next_j < n and grid[next_i][next_j] == -1):
+                # Change direction (right -> down -> left -> up -> right ...)
+                current_dir = (current_dir + 1) % 4
+                next_i, next_j = i + directions[current_dir][0], j + directions[current_dir][1]
+            
+            # Move to the next position
+            i, j = next_i, next_j
+        
         return grid
