@@ -9,16 +9,17 @@ class Solution:
         for i in range(m):
             row = [ -1 ] * n
             grid.append(row)
-        def printgrid( somegrid):
-            for i in range(len(somegrid)):
-                for j in range(len(somegrid[0])):
-                    print(somegrid[i][j], end=' ')
-                print()
+        # def printgrid( somegrid):
+        #     for i in range(len(somegrid)):
+        #         for j in range(len(somegrid[0])):
+        #             print(somegrid[i][j], end=' ')
+        #         print()
         # printgrid( grid)
 
         i=0
         j=0
         visited = set()
+        
         while head:
             # right 
             while j<n and (i,j) not in visited and head:
