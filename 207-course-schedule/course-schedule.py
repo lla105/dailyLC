@@ -1,29 +1,40 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        # 0=unvisited, 1=visiting, 2=visited
-        arr = [0] * numCourses
-        PR = prerequisites
-        # build dictionary = { pre-req: [class1, class2, ...] }
-        d = defaultdict(list)
-
-        for i in range(len(PR)):
-            d[PR[i][1]].append(PR[i][0])
-        # print(d)
-        self.isCycle = False
-
-        def bfs(classnum):
-            if arr[classnum] == 1: #is visiting
-                self.isCycle = True
-                return
-            if arr[classnum] == 2: #is visisted, cycle detected
-                return
-            arr[classnum] = 1
-            for eachClass in d[classnum]:
-                bfs(eachClass)
-            arr[classnum] = 2
-            return
-
-        for num in range(numCourses):
-            if arr[num] == 0:
-                bfs(num)
-        return not self.isCycle
+        # Build the graph as an adjacency list
+        graph = defaultdict(list)
+        
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+        
+        # Set to track courses that are fully processed (visited)
+        visited = set()
+        # Set to track courses in the current path (in the DFS call stack)
+        current_path = set()
+        
+        # DFS function to detect cycles
+        def dfs(course):
+            if course in current_path:  # Cycle detected
+                return False
+            if course in visited:  # Already processed this course, no cycle
+                return True
+            
+            # Add the course to the current path set
+            current_path.add(course)
+            
+            # Explore all neighboring courses (prerequisites)
+            for neighbor in graph[course]:
+                if not dfs(neighbor):
+                    return False
+            
+            # Remove the course from the current path and mark it as fully processed
+            current_path.remove(course)
+            visited.add(course)
+            
+            return True
+        
+        # Check each course
+        for course in range(numCourses):
+            if not dfs(course):
+                return False
+        
+        return True
