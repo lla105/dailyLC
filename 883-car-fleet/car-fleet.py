@@ -4,12 +4,9 @@ class Solution:
         for i in range(len(speed)):
             cars.append( (position[i], speed[i]) )
         print('cars : ', cars)
-        cars = sorted(cars, key=lambda x:x[0])
+        cars = sorted(cars, key=lambda x:x[0], reverse=True)
         print('sorted : ', cars)
-        revcars = [] 
-        for i in range(len(cars)-1,-1,-1):
-            revcars.append(cars[i])
-        cars = revcars
+
         stack = []
         for i in range(len(cars)):
             p = cars[i][0]
