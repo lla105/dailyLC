@@ -12,6 +12,9 @@ class Solution:
             p = cars[i][0]
             s = cars[i][1]
             t = (target-p)/ s
-            if not stack or t > stack[-1] :
+            if not stack :
                 stack.append(t)
+            else:
+                if stack[-1] < t:
+                    stack.append(t)
         return len(stack)
