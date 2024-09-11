@@ -9,8 +9,8 @@ class Solution:
         best_price[src] = 0
 
         # BFS queue, storing (current node, total cost, stops used)
-        queue = deque([(src, 0, 0)])
-
+        queue = deque()
+        queue.append( (src,0,0) )
         while queue:
             current_node, current_price, stops = queue.popleft()
 
