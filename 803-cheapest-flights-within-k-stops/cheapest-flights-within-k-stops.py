@@ -1,31 +1,27 @@
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
-        graph = defaultdict(list)
-        for u, v, p in flights:
-            graph[u].append((v, p))
+        d = defaultdict(list) # format : { source1:[ (dest,price), (dest2,pricer2) ]}
+        for fromNode, toNode, price in flights:
+            d[fromNode].append( (toNode, price) )
+        bestPrices = [ float('inf') ] * n
+        bestPrices[src] = 0
+        # print(' best prices: ', bestPrices)
+        # print( ' dict : ', d)
 
-        # To store the best prices to reach each node
-        best_price = [float('inf')] * n
-        best_price[src] = 0
+        q = deque()
+        q.append( (src, 0 , 0) )
 
-        # BFS queue, storing (current node, total cost, stops used)
-        queue = deque()
-        queue.append( (src,0,0) )
-        while queue:
-            current_node, current_price, stops = queue.popleft()
-
-            # If we've used more than k stops, skip further processing
-            if stops > k:
+        while q:
+            fromNode, curstops , prevcost = q.popleft()
+            if curstops > k:
                 continue
-
-            # Explore neighbors
-            for neighbor, price in graph[current_node]:
-                new_price = current_price + price
-
-                # Only proceed if the new price is cheaper than previously known
-                if new_price < best_price[neighbor]:
-                    best_price[neighbor] = new_price
-                    queue.append((neighbor, new_price, stops + 1))
-
-        # If the best price to reach the destination is still infinity, return -1
-        return best_price[dst] if best_price[dst] != float('inf') else -1
+            neighborlist = d[fromNode]
+            for nextNode, nextPrice in neighborlist:
+                newPrice = nextPrice + prevcost
+                if newPrice < bestPrices[nextNode]:
+                    bestPrices[nextNode] = newPrice
+                    q.append( (nextNode, curstops+1 , newPrice) )
+        if bestPrices[dst]!= float('inf'):
+            return bestPrices[dst]
+        else:
+            return -1
