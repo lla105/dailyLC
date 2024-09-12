@@ -1,28 +1,24 @@
-def countTotalTurns(piles, speed):
-    turnsUsed = 0
-    for i in range(len(piles)):
-        turnsUsed += piles[i] // speed
-        if piles[i] % speed != 0:
-            turnsUsed += 1
-    return turnsUsed
-
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        maxspeed = max(piles)
-        piles = sorted(piles)
-        left = 1
-        right = maxspeed
-        fastest = maxspeed
+        
+        def count( speed ) : 
+            hours = 0 
+            for pile in piles : 
+                hours += pile // speed
+                if pile%speed != 0 :
+                    hours += 1
+            return hours
 
-        while left <= right:
-            mid = (left+right)//2
-            turnsUsed = countTotalTurns(piles, mid)
-            # print(f'{left} ---- {mid} ---- {right}')
-            # print(f'[{mid}]: , TurnsUsed: {turnsUsed}')
-            if turnsUsed > h :
-                left = mid + 1
-            else: # turnsUsed qualifies.
-                fastest = min(fastest, mid)
-                right = mid - 1
-            # print(f'fastest: {fastest}')
-        return fastest
+        l = 1
+        r = max(piles)
+        result = max(piles)
+        while l<=r: 
+            speed = (l+r) // 2
+            hours = count(speed)
+            if hours > h :
+                l = speed + 1
+            else:
+                result = min(result, speed)
+                r = speed - 1
+
+        return result
