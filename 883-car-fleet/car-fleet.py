@@ -1,20 +1,15 @@
 class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
-        cars = []
-        for i in range(len(speed)):
-            cars.append( (position[i], speed[i]) )
-        print('cars : ', cars)
-        cars = sorted(cars, key=lambda x:x[0], reverse=True)
-        print('sorted : ', cars)
-
         stack = []
-        for i in range(len(cars)):
-            p = cars[i][0]
-            s = cars[i][1]
-            t = (target-p)/ s
-            if not stack :
-                stack.append(t)
-            else:
-                if stack[-1] < t:
-                    stack.append(t)
-        return len(stack)
+
+        for i in range(len(speed)):
+            stack.append( (position[i], speed[i]) )
+        stack = sorted(stack, key=lambda x:x[0] )
+
+        stack2 = []
+        for i in range(len(stack)-1, -1, -1):
+            timeleft = (target - stack[i][0]) / stack[i][1]
+            # print(i,timeleft)
+            if not stack2 or stack2[-1] < timeleft:
+                stack2.append( timeleft )
+        return len(stack2)
