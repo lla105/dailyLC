@@ -5,14 +5,13 @@ class Solution:
             return []
         outputList = set()
 
-        def bf( curList ) :
+        def bf( curList , index ) :
             if sum(curList) > target :
                 return
             if sum(curList) == target:
-                
                 outputList.add( tuple(sorted(curList)) )
                 return
-            for i in range(len(c)):
-                bf( curList+[c[i]])
-        bf( [] )
+            for i in range(index, len(c)):
+                bf( curList+[c[i]] , i )
+        bf( [], 0)
         return outputList
