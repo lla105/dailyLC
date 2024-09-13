@@ -9,7 +9,7 @@ class Solution:
             if sum(curList) > target :
                 return
             if sum(curList) == target:
-                outputList.add( tuple(sorted(curList)) )
+                outputList.add( tuple(curList) )
                 return
             for i in range(index, len(c)):
                 bf( curList+[c[i]] , i )
