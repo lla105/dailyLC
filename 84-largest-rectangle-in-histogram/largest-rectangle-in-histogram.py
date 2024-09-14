@@ -18,7 +18,6 @@ class Solution:
                     largest = max(largest, curh*curw)
                     savei = oldi
                 stack.append( (h,savei) )
-        print(' stack after 1st : ', stack)
         newstack = []
         for i in range(len(stack)):
             if not newstack:
