@@ -13,6 +13,6 @@ class Solution:
                 continue
             if stack[-1] < timeleft : #merge
                 stack.append( timeleft )
-            else:
-                stack[-1] = max(stack[-1] , timeleft)
+            # else:
+            #     stack[-1] = max(stack[-1] , timeleft)
         return len(stack)
