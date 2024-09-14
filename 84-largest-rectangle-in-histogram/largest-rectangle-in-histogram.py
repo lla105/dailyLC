@@ -19,14 +19,14 @@ class Solution:
                     savei = oldi
                 stack.append( (h,savei) )
         newstack = []
-        for i in range(len(stack)):
-            if not newstack:
-                newstack.append( stack[i] )
-            else:
-                if newstack[-1][0] == stack[i][0]:
-                    continue
-                else:
-                    newstack.append( stack[i] )
+        # for i in range(len(stack)):
+        #     if not newstack:
+        #         newstack.append( stack[i] )
+        #     else:
+        #         if newstack[-1][0] == stack[i][0]:
+        #             continue
+        #         else:
+        #             newstack.append( stack[i] )
         for i in range(len( stack )):
             if i==0:
                 curw = len(heights)
