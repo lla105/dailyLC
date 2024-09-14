@@ -8,11 +8,11 @@ class Solution:
         stack = []
         for i in range( len(cars)-1,-1,-1 ):
             timeleft = ( target-cars[i][0]) / cars[i][1]
-            if not stack or stack[-1] < timeleft :
+            if not stack:
                 stack.append( timeleft )
-                # continue
-            # if stack[-1] < timeleft : #merge
-            #     stack.append( timeleft )
-            # else:
-            #     stack[-1] = timeleft
+                continue
+            if stack[-1] < timeleft : #merge
+                stack.append( timeleft )
+            else:
+                stack[-1] = max(stack[-1] , timeleft)
         return len(stack)
