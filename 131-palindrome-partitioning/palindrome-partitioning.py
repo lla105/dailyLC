@@ -1,21 +1,28 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        self.result = []
-        def isPalindrome( somestring ) :
-            s1 = somestring
-            s2 = []
-            for j in range(len(s1)-1, -1, -1):
-                s2.append(s1[j])
-            s2 = ''.join(s2)
-            return s1==s2
+        result = []
+        
+        def isPalindrome(start, end):
+            while start < end:
+                if s[start] != s[end]:
+                    return False
+                start += 1
+                end -= 1
+            return True
+        
+        def backtrack(start, path):
+            if start == len(s):
+                result.append(path[:])  # Make a copy of path
+                return
             
-        def trav( curList, index) :
-            if index >= len(s):
-                self.result.append( tuple(curList) )
-            for i in range( index, len(s) ):
-                temp = isPalindrome( s[index:i+1] )
-                # print(temp)
-                if temp:
-                    trav( curList+[s[index:i+1]] , i+1 )
-        trav( [] , 0 )
-        return self.result
+            for end in range(start, len(s)):
+                if isPalindrome(start, end):
+                    # Add the substring s[start:end+1] to the current path
+                    path.append(s[start:end+1])
+                    # Recurse with the next start index
+                    backtrack(end + 1, path)
+                    # Backtrack, remove the last element added
+                    path.pop()
+        
+        backtrack(0, [])
+        return result
