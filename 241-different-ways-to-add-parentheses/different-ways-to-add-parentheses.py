@@ -4,7 +4,8 @@ class Solution:
         # ans = []
         for i in range(len(expression)):
             oper = expression[i]
-            if oper == "+" or oper == "-" or oper == "*":
+            # if oper == "+" or oper == "-" or oper == "*":
+            if oper in '+-*':
                 sub_str1 = expression[0 : i]
                 sub_str2 = expression[i + 1 : ]
                 s1 = self.diffWaysToCompute(sub_str1)
