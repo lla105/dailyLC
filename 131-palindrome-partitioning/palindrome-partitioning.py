@@ -14,7 +14,7 @@ class Solution:
                 self.result.append( tuple(curList) )
             for i in range( index, len(s) ):
                 temp = isPalindrome( s[index:i+1] )
-                print(temp)
+                # print(temp)
                 if temp:
                     trav( curList+[s[index:i+1]] , i+1 )
         trav( [] , 0 )
