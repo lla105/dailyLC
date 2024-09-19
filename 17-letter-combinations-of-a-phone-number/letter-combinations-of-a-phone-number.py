@@ -12,16 +12,19 @@ class Solution:
             '8':'tuv',
             '9':'wxyz'
         }
-        self.output = []
-        def bf( curList, index) :
-            if  len(curList) == len(digits):
-                self.output.append( ''.join(curList) )
+        output = []
+        def bf( curList , dindex ) :
+            if len(curList)==len(digits):
+                output.append( ''.join(curList) )
                 return
-            for i in range( index, len(digits)):
-                digit = digits[i]
-                if digit in self.d :
-                    chars = self.d[digit]
-                    for char in chars:
-                        bf (curList+[char] , i+1 )
-        bf( [], 0 )
-        return self.output
+            if dindex >= len(digits):
+                return
+            curnum = digits[dindex]
+            letters = self.d[curnum]
+            for char in letters :
+                for i in range( dindex , len(digits)):
+                    bf( curList+[char] , i+1 )
+            
+
+        bf( [] , 0 ) 
+        return output
