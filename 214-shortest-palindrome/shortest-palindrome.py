@@ -1,23 +1,26 @@
 class Solution:
     def shortestPalindrome(self, s: str) -> str:
-        # Create a new string that is the reverse of s
+        # Create the reversed string
         rev_s = s[::-1]
-        # Concatenate s with a separator and its reverse
-        new_s = s + "#" + rev_s
+        # Concatenate s + '#' + rev_s to avoid overlap issues
+        combined = s + '#' + rev_s
         
-        # Build the KMP table
-        lps = [0] * len(new_s)
-        j = 0  # Length of the previous longest prefix suffix
+        # KMP-style table to find the longest prefix palindrome
+        lps = [0] * len(combined)
         
-        for i in range(1, len(new_s)):
-            while (j > 0 and new_s[i] != new_s[j]):
+        # Build the KMP table (longest prefix suffix array)
+        for i in range(1, len(combined)):
+            j = lps[i - 1]
+            while j > 0 and combined[i] != combined[j]:
                 j = lps[j - 1]
-            if new_s[i] == new_s[j]:
+            if combined[i] == combined[j]:
                 j += 1
-                lps[i] = j
+            lps[i] = j
         
-        # The length of the longest palindromic prefix
-        longest_palindromic_prefix_len = lps[-1]
+        # lps[-1] gives us the longest palindrome starting from index 0
+        longest_palindrome_len = lps[-1]
         
-        # Append the necessary characters to the beginning of s
-        return rev_s[:len(s) - longest_palindromic_prefix_len] + s
+        # The part we need to add is the remaining part after the palindrome
+        add_on = rev_s[:len(s) - longest_palindrome_len]
+        
+        return add_on + s
