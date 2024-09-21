@@ -1,21 +1,21 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
-        result = []
+        output = []
 
-        def dfs(baseIndex):
-            if baseIndex * 10 > n:
+        def dfs( base ):
+            newbase = base*10
+            if newbase > n:
                 return
-
-            for i in range(baseIndex * 10, baseIndex * 10 + 10):
-                if i > n:
-                    break
-                result.append(i)
+            for i in range( newbase , newbase+10):
+                if i>n :
+                    continue
+                output.append(i)
                 dfs(i)
-
-        for i in range(1, 10):
-            if i > n:
-                break
-            result.append(i)
+        
+        for i in range(1,10):
+            if i>n:
+                continue
+            output.append(i)
             dfs(i)
 
-        return result
+        return output
