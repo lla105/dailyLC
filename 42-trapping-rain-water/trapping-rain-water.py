@@ -1,23 +1,22 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
+        l1 = 0
+        l2 = 0
+        h = height
+        r1 =  len(h)-1
+        r2 = len(h)-1
         water = 0
-        l = 0 
-        r = len(height) - 1
-        lmax = height[l]
-        rmax = height[r]
-
-        while l<r:
-
-            if height[l] > height[r] :
-                r -= 1
-                if height[r] < rmax:
-                    water += rmax - height[r]
+        while l1 < r1:
+            if h[l1] <= h[r1]:
+                l1+=1
+                if h[l2] > h[l1]:
+                    water += h[l2] - h[l1]
                 else:
-                    rmax = height[r]
+                    l2 = l1
             else:
-                l += 1
-                if height[l] < lmax :
-                    water += lmax - height[l]
+                r1-=1
+                if h[r2]>h[r1]:
+                    water += h[r2] - h[r1]
                 else:
-                    lmax = height[l]
+                    r2 = r1
         return water
