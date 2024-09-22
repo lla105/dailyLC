@@ -10,14 +10,11 @@ class Solution:
         def trav(node):
             if not node:
                 return
-            arr.append(node.val)
+            arr.append( node.val )
             left = trav(node.left)
             right = trav(node.right)
             return
         trav(root)
-        heapq.heapify(arr)
-        count = 0
-        while count+1 < k:
-            heapq.heappop(arr)
-            count += 1
-        return arr[0]
+        print(arr)
+        arr = sorted(arr)
+        return arr[k-1]
