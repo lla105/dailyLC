@@ -7,18 +7,19 @@
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         arr = []
-        def trav(node):
-            # if n?return
-            arr.append( node.val )
-            if node.left:
-                left = trav(node.left)
-            if node.right:
-                right = trav(node.right)
-            return
+
+        def trav( node ):
+            if not node:
+                return
+            arr.append(node.val)
+            trav(node.left)
+            trav(node.right)
+
         trav(root)
         heapq.heapify(arr)
+
         count = 0
         while count < k:
-            removed = heapq.heappop(arr)
+            num = heapq.heappop(arr)
             count+=1
-        return removed
+        return num
