@@ -1,25 +1,33 @@
 class Solution:
     def diffWaysToCompute(self, expression: str) -> List[int]:
-        def bf( arr ):
-            self.diffWaysToCompute( arr )
         output = []
         exp = expression
-        for i in range(len(exp)):
-            op = exp[i]
-            if op not in '+-*':
-                continue
-            # left  = bf( exp[ :i] )
-            # right = bf( exp[i+1:] )
-            left = self.diffWaysToCompute( exp[0:i] )
-            right = self.diffWaysToCompute( exp[i+1: ] )
-            for i in left:
-                for j in right:
-                    if op == '*':
-                        output.append( int(i)*int(j) )
-                    elif op=='+':
-                        output.append( int(i)+int(j) )
-                    elif op=='-':
-                        output.append( int(i)-int(j) )
-        if not output:
-            output.append(int(exp))
-        return output
+
+        def dfs( arr ) :
+            curlist = []
+            for i in range(len(arr)):
+                char = arr[i]
+                if char not in '+-*':
+                    continue
+                left = dfs( arr[ :i] )
+                right = dfs( arr[i+1:] )
+                print(left, char, right)
+                for num1 in left:
+                    for num2 in right:
+                        if char=='+':
+                            tempnum = int(num1) + int(num2)
+                        elif char=='-':
+                            tempnum = int(num1) - int(num2)
+                        elif char=='*':
+                            tempnum = int(num1) * int(num2)
+                        curlist.append(tempnum)
+            if not curlist:
+                return [ int(arr) ]
+            return curlist            
+        return dfs(exp)
+        
+        # for i in range(len(exp)):
+        #     char = exp[i]
+        #     if char not in '+-*':
+        #         continue
+            
