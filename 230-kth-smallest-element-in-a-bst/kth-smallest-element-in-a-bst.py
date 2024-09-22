@@ -8,15 +8,14 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         arr = []
         def trav(node):
-            if not node:
-                return
+            # if n?return
             arr.append( node.val )
-            left = trav(node.left)
-            right = trav(node.right)
+            if node.left:
+                left = trav(node.left)
+            if node.right:
+                right = trav(node.right)
             return
         trav(root)
-        print(arr)
-        # arr = sorted(arr)
         heapq.heapify(arr)
         count = 0
         while count < k:
