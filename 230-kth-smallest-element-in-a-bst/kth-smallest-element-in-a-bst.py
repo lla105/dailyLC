@@ -16,5 +16,10 @@ class Solution:
             return
         trav(root)
         print(arr)
-        arr = sorted(arr)
-        return arr[k-1]
+        # arr = sorted(arr)
+        heapq.heapify(arr)
+        count = 0
+        while count < k:
+            removed = heapq.heappop(arr)
+            count+=1
+        return removed
