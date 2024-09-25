@@ -8,8 +8,8 @@ class Solution:
         for i in range(2, len(dp)):
             if i==2:
                 dp[i] = nums[i] + dp[i-2]
-                print('>>> ' , nums[i] , dp[i-2])
+                # print('>>> ' , nums[i] , dp[i-2])
                 continue
             dp[i] = max( nums[i]+dp[i-3] , nums[i]+dp[i-2] )
-            print( dp, nums[i]+dp[i-3] , nums[i]+dp[i-2] )
+            # print( dp, nums[i]+dp[i-3] , nums[i]+dp[i-2] )
         return max(dp[-1], dp[-2])
