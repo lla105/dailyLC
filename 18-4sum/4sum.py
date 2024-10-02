@@ -17,7 +17,6 @@ class Solution:
                     num3 = nums[l]
                     num4 = nums[r]
                     cursum = num1+num2+num3+num4
-                    # print('>> ', [num1,num2,num3,num4], '=', cursum)
                     if cursum > target:
                         # print('  cursum > target')
                         r-=1
