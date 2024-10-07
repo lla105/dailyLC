@@ -4,6 +4,8 @@ class Solution:
         for i in range(len(nums)):
             num = nums[i]
             d[num] = d.get(num, 0 ) + 1
-            if d[num] > 1:
+            if d[num] <= 1:
+                continue
+            else:
                 return True
         return False
