@@ -4,4 +4,5 @@ class Solution:
             if haystack[i] == needle[0]:
                 if haystack[i:i+len(needle)] == needle:
                     return i
+        print(' ???')
         return -1
