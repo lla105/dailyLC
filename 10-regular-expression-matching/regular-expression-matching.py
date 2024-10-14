@@ -15,11 +15,11 @@ class Solution:
         if i != -1 and j == -1:
             cache[key] = False
             return cache[key]
-
         if i == -1 and p[j] == '*':
+
             k = j
             while k != -1 and p[k] == '*':
-                k -= 2
+                k = k-2
             
             if k == -1:
                 cache[key] = True
@@ -46,6 +46,6 @@ class Solution:
             if self.backtrack(cache, s, p, i - 1, j - 1):
                 cache[key] = True
                 return cache[key]
-
+# asdfasdfsdafs
         cache[key] = False
         return cache[key]
