@@ -21,7 +21,7 @@ class Solution:
             d[diff] -=1 
             output.append( (num,diff) )
         answer = 0
-        print('???')
+        print('??fffasdf?asdf')
         if not output or len(output) != halflen :
             return -1
         for num1,num2 in output:
