@@ -1,23 +1,27 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        # closed = { '(':')' , '{':'}' , '[':']' }
-        closed = { ')':'(' , '}':'{' , ']':'['}
         stack = []
-
+        print('?k')
         for i in range(len(s)):
-            if s[i] in closed:
-                # is closed bracket
+            if s[i] in '({[' :
+                stack.append(s[i])
+            # elif s[i] in ')}]':
+            elif False:
+                print()
+            else:
                 if not stack:
                     return False
+                if s[i] == ')' and stack[-1]=='(':
+                    stack.pop()
+                elif s[i] == '}' and stack[-1]=='{':
+                    stack.pop()
+                elif s[i] == ']' and stack[-1]=='[':
+                    stack.pop()
                 else:
-                    if closed[s[i]] == stack[-1]:
-                        stack.pop()
-                    else:
-                        return False
-            else:
-                # is open bracket
-                stack.append(s[i])
-        if not stack:
-            return True
-        else:
+                    # print(' false in loop. s[i] : ', s[i])
+                    return False
+        if stack :
             return False
+        else:
+
+            return True
