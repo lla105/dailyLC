@@ -18,4 +18,5 @@ class Solution:
                     stack.append(char)
             else:
                 stack.append(char)
+        print('??')
         return len(stack)
