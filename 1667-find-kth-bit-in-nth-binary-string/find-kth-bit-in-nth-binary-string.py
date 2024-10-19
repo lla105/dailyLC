@@ -17,6 +17,6 @@ class Solution:
             s3 = rev_inv(prev)
             prev = s1+s2+s3
         # temp = rev_inv('0111001')
-        print(prev)
+        # print(prev)
 
         return prev[k-1]
