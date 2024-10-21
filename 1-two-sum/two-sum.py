@@ -8,3 +8,4 @@ class Solution:
                 return (d[diff] , i)
             d[num] = i
             # print(d)
+        print('asdf')
