@@ -3,7 +3,7 @@ class Solution:
         
         maxlen = 0
         maxstring = ''
-
+        whatj= 0
         for i in range(len(s)):
             #even 
             l=i
@@ -18,6 +18,7 @@ class Solution:
             #odd
             l=i
             r=i
+            print()
             while l>=0 and r<len(s) and s[l]==s[r]:
                 if maxlen < len(s[l:r+1]):
                     maxlen = len(s[l:r+1])
