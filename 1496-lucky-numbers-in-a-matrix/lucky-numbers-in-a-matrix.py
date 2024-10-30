@@ -1,18 +1,15 @@
 class Solution:
     def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
-        def printgrid(m):
-            for i in range(len(m)):
-                for j in range(len(m[0])):
-                    num = m[i][j]
-                    if num > 10:
-                        print(m[i][j], end=', ')
-                    else:
-                        print(m[i][j], end=',  ')
-                print()
+        # def printgrid(m):
+        #     for i in range(len(m)):
+        #         for j in range(len(m[0])):
+        #             num = m[i][j]
+        #             if num > 10:
+        #                 print(m[i][j], end=', ')
+        #             else:
+        #                 print(m[i][j], end=',  ')
+        #         print()
         m = matrix
-        # printgrid(m)
-        # print()
-        # minnums = []
         d = {} # format : { num: (i,j) }
         for i in range(len(m)):
             lowest=float('inf')
