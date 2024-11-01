@@ -9,7 +9,7 @@ class Solution:
         output.append(second)
         for i in range(2,numRows):
             arr = [1]* (i+1)
-            print(arr)
+            # print(arr)
             for j in range(1,i):
                 prevval1 = output[-1][j-1] 
                 prevval2 = output[-1][j]
