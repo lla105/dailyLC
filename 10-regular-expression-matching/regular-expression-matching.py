@@ -2,12 +2,11 @@ class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         i, j = len(s) - 1, len(p) - 1
         return self.backtrack({}, s, p, i, j)
-
+    print('?')
     def backtrack(self, cache, s, p, i, j):
         key = (i, j)
         if key in cache:
             return cache[key]
-
         if i == -1 and j == -1:
             cache[key] = True
             return True
