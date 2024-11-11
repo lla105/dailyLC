@@ -8,6 +8,7 @@ class Solution:
             return False
         # If the values of the roots are different, they are not flip equivalent
         if root1.val != root2.val:
+            print('is true')
             return False
         
         # Check if the children are flip equivalent in one of two ways:
