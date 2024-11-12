@@ -1,29 +1,30 @@
-def runbfs(i,j,grid, counting):
-    if i>=len(grid) or j>=len(grid[0]):
-        return 0
-    if i<0 or j<0:
-        return 0
-    if grid[i][j] != 1:
-        return 0
-    grid[i][j] = 99
-    counting = 1
-
-    right = runbfs(i+1,j,grid,counting)
-    top = runbfs(i,j+1,grid,counting)
-    left = runbfs(i-1,j,grid,counting)
-    down = runbfs(i,j-1,grid,counting)
-
-    print(" returning: ", right, top, left, down)
-    return right + top + left + down + counting
-
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        count = 0
+        m = len(grid)
+        n = len(grid[0])
+        def dfs(i,j):
+            if i<0 or j<0 or i>=m or j>=n:
+                return 0
+            if grid[i][j] != 1:
+                return 0
+            grid[i][j] = 2
+            left = dfs(i-1,j)
+            down = dfs(i,j-1)
+            right = dfs(i+1,j)
+            up = dfs(i,j+1)
+            return ((left+down+right+up) + 1)
+            # return 1
+        arr = []
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == 1:
-                    tempcount = runbfs(i,j,grid,0)
-                    print(">>>", tempcount, "[]",i,j)
-                    count = max(count, tempcount)
-        print(grid)
-        return count 
+                    temp = dfs(i,j)
+                    arr.append(temp)
+        # print(arr)
+        # print(max(arr))
+        output = 0
+        for num in arr:
+            output = max(output,num)
+        # return max(arr)
+        return output
+                
