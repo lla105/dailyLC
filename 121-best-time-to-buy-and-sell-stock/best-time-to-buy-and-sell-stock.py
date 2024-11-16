@@ -1,6 +1,7 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         cheapest = float('inf')
+        maxprofit = 0
         maxprofit = float('-inf')
         for i in range(len(prices)):
             if prices[i] < cheapest:
