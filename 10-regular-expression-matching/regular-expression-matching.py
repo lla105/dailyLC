@@ -14,7 +14,7 @@ class Solution:
         if i != -1 and j == -1:
             cache[key] = False
             return cache[key]
-        if i == -1 and p[j] == '*':
+        if i == -1 and p[j] == '*' and True:
 
             k = j
             while k != -1 and p[k] == '*':
