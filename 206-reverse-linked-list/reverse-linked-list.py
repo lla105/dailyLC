@@ -8,7 +8,7 @@ class Solution:
         cur = head
         prevnode = None
         rhead = None
-
+        print("...")
         while cur :
             nextnode = cur.next
             cur.next = prevnode
