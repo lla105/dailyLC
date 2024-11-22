@@ -6,7 +6,8 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        s= set()
+        s = set()
+        ds = {}
         cur = head
         while cur:
             if cur in s:
@@ -14,6 +15,5 @@ class Solution:
             else:
                 s.add(cur)
             cur = cur.next
-            # print(cur.val, ' ...... ', s)
-
+        print('asdfsdf')
         return False
