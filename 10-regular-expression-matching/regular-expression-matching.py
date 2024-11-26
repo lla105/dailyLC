@@ -19,7 +19,8 @@ class Solution:
             k = j
             while k != -1 and p[k] == '*':
                 k = k-2
-            
+            if k == -2:
+                print('what')
             if k == -1:
                 cache[key] = True
                 return cache[key]
