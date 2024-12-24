@@ -12,23 +12,16 @@ class Solution:
             
         self.answer = False
         def trav( node, cursum ):
-            # if not node : 
-            #     # print(' leaf : ', cursum)
-            #     if cursum == targetSum:
-            #         self.answer = True
-            #         return True
-            #     return False
             if not node:
-                return
+                return False
             # print('>> ', node.val, '--> ', cursum+node.val)
             if not node.left and not node.right and cursum+node.val==targetSum:
                 self.answer = True
                 return True
-            trav(node.left, cursum+node.val)
-            # if left:
-            #     return left
-            trav(node.right, cursum+node.val)
-            # if right:
-            #     return right
-        trav( root, 0)
+            if trav(node.left, cursum+node.val) :
+                return True
+            if trav(node.right, cursum+node.val) :
+                return True
+            return False
+        return trav( root, 0 )
         return self.answer
