@@ -18,7 +18,7 @@ class Solution:
         seen = set()
         for i in range(len(newwords)):
             for j in range(i+1 , len(newwords)):
-                print( newwords[i], ' vs ', newwords[j])
+                # print( newwords[i], ' vs ', newwords[j])
                 if newwords[i] in newwords[j] and newwords[i] not in seen:
                     seen.add( newwords[i] )
                     output.append( newwords[i] )
