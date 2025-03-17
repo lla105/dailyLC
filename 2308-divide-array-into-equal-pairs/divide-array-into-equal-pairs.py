@@ -6,7 +6,7 @@ class Solution:
                 d[nums[i]] += 1
             else:
                 d[nums[i]] = 1
-        print(d)
+        # print(d)
         for i,v in d.items():
             # print(v,'//','2','=', v//2)
             if v%2 != 0:
