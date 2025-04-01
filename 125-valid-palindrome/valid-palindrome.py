@@ -1,21 +1,23 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        left = 0
-        # tempset = {' ', ',', '.', ':', ';', '@', '#'}
-        news = s
-        s = ''
-        for i in range(len(news)):
-            # if news[i] not in tempset:
-            if news[i].isalpha() or news[i].isdigit():
-                s += news[i].lower()
-        right = len(s)-1
-
-        print(s)
-        while left<right:
-            print(s[left].lower(), s[right].lower())
-            if s[left].lower() != s[right].lower() :
-                # print(s[left].lower(), s[right].lower())
+        # eg  s = 'acbca'
+        # eg2 s = 'abba'
+        nums = '1234567890'
+        upper = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'
+        new_string = ""
+        for char in s:
+            if char in upper:
+                new_string += char.lower()
+            elif char in nums:
+                new_string += char.lower()
+        print(new_string)
+        l = len(new_string) - 1
+        r = 0
+        while r<l:
+            if new_string[r] == new_string[l] :
+                r += 1
+                l -= 1
+            else:
                 return False
-            left+=1
-            right -=1
+
         return True
