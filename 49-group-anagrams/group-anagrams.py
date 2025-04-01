@@ -1,17 +1,14 @@
-class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        d = {} # format : { key:[value1,value2] }
-
-        for i in range(len(strs)):
-            ss = sorted(strs[i])
-            # print(ss)
-            ss = ''.join(ss)
-            if ss in d:
-                d[ss].append(strs[i])
+class Solution(object):
+    def groupAnagrams(self, strs):
+        d = {}
+        for curstring in strs:
+            sorted_string = ''.join(sorted(curstring))
+            if sorted_string in d:
+                d[sorted_string].append( curstring )
             else:
-                d[ss] = [ strs[i] ]
-
-        result = []
+                d[sorted_string] = [curstring]
+        output = []
         for i,v in d.items():
-            result.append(v)
-        return result
+            output.append(v)
+        return output
+        
