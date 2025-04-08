@@ -1,22 +1,15 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        l1 = 0
-        l2 = 0
-        h = height
-        r1 =  len(h)-1
-        r2 = len(h)-1
-        water = 0
-        while l1 < r1:
-            if h[l1] <= h[r1]:
-                l1+=1
-                if h[l2] > h[l1]:
-                    water += h[l2] - h[l1]
-                else:
-                    l2 = l1
-            else:
-                r1-=1
-                if h[r2]>h[r1]:
-                    water += h[r2] - h[r1]
-                else:
-                    r2 = r1
-        return water
+        stack = []
+        output = 0
+        for i in range(len(height)):
+            cur_h = height[i]
+            while stack and height[stack[-1]] < cur_h :
+                bottom = stack.pop()
+                if not stack:
+                    break
+                min_h = min(cur_h , height[stack[-1]] ) - height[bottom]
+                w = i - stack[-1] -1 
+                output += min_h*w
+            stack.append( i )
+        return output
