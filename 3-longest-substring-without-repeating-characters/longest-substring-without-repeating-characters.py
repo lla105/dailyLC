@@ -13,6 +13,5 @@ class Solution:
                     sset.remove(num)
             sset.add(s[i])
             q.append(s[i])
-            print('>> ', q)
             output = max(output, len(q))
         return output
