@@ -1,18 +1,20 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        if amount == 0:
+        if not amount:
             return 0
-        dp = [ float('inf') ] * (amount + 1)
-        dp[0] = 0
-        for i in range(1, len(dp)):
-            for coin in coins:
-                if i<coin:
+        arr = [ float('inf') ] * (amount+1)
+        arr[0] = 0
+        # print(arr)
+        for i in range(len(arr)):
+            denomination = i
+            for j in range(len(coins)):
+                coin = coins[j]
+                if denomination < coin:
                     continue
-                dp[i] = min(dp[i] , dp[i-coin]+1)
-        print(dp)
-
-        # return dp[-1]
-        if dp[-1]%1 != 0:
+                # print(arr[i] , arr[i-coin]+1)
+                arr[i] = min( arr[i] , arr[i-coin]+1 )
+                # print(arr)
+        if type(arr[-1]) == float:
             return -1
         else:
-            return dp[-1]
+            return arr[-1]
