@@ -16,7 +16,7 @@ class Solution:
                 if boo_arr_vert[boo_index_vert] :
                     return False
                 boo_arr_vert[boo_index_vert] = True
-        print(' good so far? ')
+        # print(' good so far? ')
         # for i in range(len(matrix)):
         #     boo_arr = [False] * len(matrix)
         #     for j in range(len(matrix[0])):
