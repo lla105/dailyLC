@@ -1,25 +1,25 @@
 class Solution:
     def areAlmostEqual(self, s1: str, s2: str) -> bool:
-        if s1==s2:
-            return True
-        mismatch_index = []
+        print('len s1: ', len(s1))
+        s1_arr = []
+        s2_arr = []
+        match_count = 0
         for i in range(len(s1)):
+            print('>> ', s1[i], s2[i] )
             if s1[i] != s2[i] :
-                mismatch_index.append(i)
-        # s1_new = 
-        if len(mismatch_index) >2:
+                print(' MIS MATCH')
+                s1_arr.append( s1[i] )
+                s2_arr.append( s2[i] )
+            else:
+                match_count += 1
+                print(' match ocunt : ', match_count)
+        # if s1_arr[0] == s2_arr[1] and s1_arr[]
+        if match_count != len(s1)-2 and len(s1_arr)!=0 :
+            print( ' match ocunt bad: ', match_count)
             return False
-        print(mismatch_index)
 
-        if len(mismatch_index) == 2:
-            a = mismatch_index[0]
-            b = mismatch_index[1]
-            # s1_new = s1[:mismatch_index[0]] + s2[mismatch_index[0]] + s1[mismatch_index[0]+1 : mismatch_index[1]] + s2[mismatch_index[1]] + s1[mismatch_index[1]+1 :]
-            s1_new = s1[:a] + s1[b] + s1[a+1:b] + s1[a] + s1[b+1:] 
-        elif len(mismatch_index) == 1:
-            return False
-        print(f's1_new : {s1_new}')
-        if s1_new == s2:
+        if sorted(s1_arr) == sorted(s2_arr) :
             return True
         else:
+            print(' arrs wrong ')
             return False
