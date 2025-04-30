@@ -1,16 +1,16 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        bestprice = max(prices)
-        bestprofit = -1
-
+        # decisions: 
+        # - buy or sell. to sell, need to buy first
+        # - either we buy or don't buy
+        # - buy, sell
+        # - if cur price < prev price, buy price = cur price
+        # - if sell price > buy price, update profit.
+        profit = 0
+        buy_price = float('inf')
         for i in range(len(prices)):
-            p = prices[i]
-            if bestprice > p:
-                bestprice = p
+            if prices[i] < buy_price :
+                buy_price = prices[i]
             else:
-                bestprofit = max(bestprofit, p-bestprice)
-
-        if bestprofit<0:
-            return 0
-        else:
-            return bestprofit
+                profit = max(profit, abs(buy_price - prices[i] ))
+        return profit
