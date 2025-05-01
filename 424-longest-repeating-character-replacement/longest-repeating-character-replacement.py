@@ -13,3 +13,4 @@ class Solution:
                 d[leftchar] -= 1
             max_len = max(max_len, len(q))
         return max_len
+        
