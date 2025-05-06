@@ -18,9 +18,9 @@ class Solution:
                 temp[-1] = count
                 count -= 1
             cache.append(temp)
-        print(len(cache), ' vs ', len(cache[0]))
-        for row in cache:
-            print(row)
+        # print(len(cache), ' vs ', len(cache[0]))
+        # for row in cache:
+        #     print(row)
 
         # word1 = 'abd' 
         # word2 = 'acd'
