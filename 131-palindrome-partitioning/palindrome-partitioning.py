@@ -1,27 +1,26 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        if not s:
-            return []
-        self.output = []
-        def isPalindrome( somestring ):
-            l = 0
-            r = len(somestring) - 1
-            while l<r:
-                if somestring[l] != somestring[r] :
-                    return False
-                l+=1
-                r-=1
-            return True
-        def bf( curList , index ) :
-            # if len(curList) == len(s):
-                # return
-            if index >= len(s):
-                self.output.append( tuple(curList) )
+        output = []
+        def isPalindrome( arr ) :
+            i = 0
+            j = len(arr) - 1
+            while i<j and arr[i]==arr[j] :
+                i+=1
+                j-=1
+            if i == j or i-1==j :
+                return True
+            else:
+                return False
+        def trav( cur_list , idx):
+            if idx == len(s):
+                output.append( tuple(cur_list) )
                 return
-            for i in range( index , len(s) ):
-                tempstring = s[index : i+1]
-                temp = isPalindrome( tempstring )
-                if temp:
-                    bf( curList+[tempstring] , i+ 1 )
-        bf( [] , 0 ) 
-        return self.output
+            for i in range( idx, len(s) ):
+                ispalin = isPalindrome(s[idx:i+1])
+                if ispalin:
+                    trav( cur_list+[ s[idx:i+1]], i+1 )
+            return
+        trav( [], 0 )
+        return output
+            # aba
+            # aa
