@@ -1,15 +1,13 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
+        ds ={}
+        dt = {}
+        if len(t) != len(s):
             return False
-        sdic = {}
-        tdic = {}
         for i in range(len(s)):
-            sdic[s[i]] = sdic.get(s[i], 0 ) + 1
-            tdic[t[i]] = tdic.get(t[i], 0 ) + 1
-        for i,v in sdic.items():
-            if i not in tdic:
-                return False
-            if v != tdic[i]:
+            ds[s[i]] = ds.get( s[i] , 0 ) + 1
+            dt[t[i]] = dt.get( t[i] , 0 ) + 1
+        for i,v in ds.items():
+            if i not in dt or dt[i] != v :
                 return False
         return True
