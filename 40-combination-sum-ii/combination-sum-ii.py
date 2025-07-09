@@ -1,18 +1,17 @@
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        c = candidates
-        c = sorted(c)
+        c = sorted(candidates)
         output = []
-        def bf( curList , index ) :
-            if sum(curList) == target:
-                output.append( tuple(curList) )
+        def traverse( summ, arr, start_index ):
+            if summ> target:
                 return
-            if sum(curList) > target:
-                return
-
-            for i in range( index , len(c)):
-                if i>index and c[i]==c[i-1]:
+            if summ==target:
+                sorted_arr = sorted(arr)
+                output.append( tuple(sorted_arr) )
+                return 
+            for i in range(start_index, len(c) ):
+                if i>start_index and c[i]==c[i-1] :
                     continue
-                bf( curList+[c[i]] , i+1)
-        bf( [] , 0 )
+                traverse( summ+c[i], arr+[c[i]], i+1)
+        traverse(0, [], 0)
         return output
