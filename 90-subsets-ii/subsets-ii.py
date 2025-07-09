@@ -1,14 +1,15 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
-        output = set()
         nums = sorted(nums)
-        def bf( curList, index ) :
-            output.add( tuple(curList) )
+        output = []
+        def traverse(start_index, cur_arr) :
+            output.append( cur_arr )
 
-            for i in range( index, len(nums) ):
-                if i>index and nums[i]==nums[i-1:] :
+            if start_index == len(nums) :
+                return
+            for i in range( start_index, len(nums)):
+                if i>start_index and nums[i]==nums[i-1]:
                     continue
-                bf( curList+[nums[i]] , i+1 )
-
-        bf( [] , 0)
+                traverse( i+1, cur_arr + [nums[i]] )
+        traverse(0, [])
         return output
