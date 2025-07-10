@@ -1,19 +1,45 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-
-        if n == 0 :
-            return 0
-        if n == 2:
-            return 2
         if n == 1:
             return 1
-        dp = [float('inf')] * (n+1)
-        dp[0] = 0
-        dp[1] = 1
-        dp[2] = 2
-
-        for i in range(3, len(dp)):
+        if n == 2:
+            return 2
+        dp = [ float('inf') ] * n
+        dp[0] = 1
+        dp[1] = 2
+        for i in range(2, n) :
             dp[i] = dp[i-1] + dp[i-2]
-        # print(dp)
-        
-        return dp[n]
+        return dp[-1]
+
+#trav(0)
+#   trav(1) 
+#       trav(2)
+#           trav(3)
+#           trav(4)
+#       trav(3)
+#   trav(2)
+#       trav(3)
+#       trav(4)
+
+# n = 2
+# [1,1], [2]
+# n = 3
+# [1,1,1], [1,2], [2,1]
+
+# Decisions: at each step, either:
+# a) take 1 step
+# b) take 2 steps
+#[1]
+#   [1,1]
+#       [1,1,1]
+#       [1,1,2]
+#   [1,2]
+#       [1,2,1]
+#       [1,2,2]
+#[2]
+#   [2,1]
+#       [2,1,1]
+#       [2,1,2]
+#   [2,2]
+#       [2,2,1]
+#       [2,2,2]
