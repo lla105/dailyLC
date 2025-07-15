@@ -1,26 +1,31 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         output = []
-        def traverse( nums_index , temp_arr ) :
-            if nums_index >= len(nums) :
-                output.append( tuple(temp_arr) )
-
+        def traverse(cur_arr, av_list , idx):
+            # if len(cur_arr) == len(nums) :
+            #     output.append( tuple(cur_arr) )
+            #     return
+            if idx == len(nums) :
                 return
-            output.append( tuple(temp_arr) )
-            for i in range( nums_index , len(nums) ) :
-                traverse( i+1 , temp_arr + [nums[i]] )
-        traverse( 0 , [] )
+            output.append( tuple(cur_arr) )
+            for i in range( len(av_list) ) :
+                # next_av_list = av_list[:i] + av_list[i+1:]
+                next_av_list = av_list[i+1:]
+                traverse( cur_arr+[av_list[i]] , next_av_list , idx)
+        traverse([] , nums , 0)
+
         return output
-        
-# somefunction( nums_index, temp_arr )
-#    check base case
 
-#      for i in range(nums_index , len(nums)):
-#           somefunction( i+1 , temp_arr+[nums[i]] ) > (0+1 , [1])
+#(cur_arr , av_list)
+#([] , [1,2,3])
+#   ([])
 
-#somefunction(0, [] )
-#somefunction(1, [1] )
-#somefunction(2, [1,2] )
-#somefunction(3, [1,2,3] )
-#somefunction(3, [1,3] )
 
+
+#[]
+#   [1]
+#       [1,2]
+#           [1,2,3]
+#   [2]
+#       [2,3]
+#   [3]
