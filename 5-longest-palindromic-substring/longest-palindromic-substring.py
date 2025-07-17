@@ -1,40 +1,28 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        output = ""
-        def pal_len( idx , is_even ) :
-            if is_even:
-                l = idx
-            else:
-                l = idx-1
+        def count_even_pal(idx):
+            l = idx
             r = idx+1
             while l>=0 and r<len(s) and s[l]==s[r]:
                 l-=1
                 r+=1
-            l+=1
-            r-=1
-            return s[l:r+1]
+            return s[l+1 : r]
+        def count_odd_pal(idx):
+            l = idx
+            r = idx
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                l-=1
+                r+=1
+            return s[l+1 : r]
+        output = ""
         for i in range(len(s)):
-            even = pal_len(i,is_even=True)
-            odd = pal_len(i,is_even=False)
-            if len(even) > len(output) :
-                output = even
-            if len(odd) > len(output) :
-                output = odd
+            even_string = count_even_pal(i)
+            odd_string = count_odd_pal(i)
+            if len(even_string) > len(output):
+                output = even_string
+            if len(odd_string) > len(output):
+                output = odd_string
         return output
-
-#s1=aba
-#s2=abba
-
-# s= babad
-# b
-#   b
-#   ba
-# a
-#   bab 
-#   ab
-# s = cbbd
-# c
-# b
-#   cbb
-#   bb
-#       cbbd NOPE
+# s = 12378321
+# s = abba <- even case
+# s = aba. <- odd case
