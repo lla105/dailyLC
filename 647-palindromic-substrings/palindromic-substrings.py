@@ -1,17 +1,17 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        result = 0
-        templist = []
-        def traverse(s,l,r):
-            count = 0
+        self.output = 0
+
+        def find_palin(l,r):
             while l>=0 and r<len(s) and s[l]==s[r]:
-                count+=1
+                # print(s[l:r+1])
                 l-=1
                 r+=1
-            return count
-        for i in range(len(s)):
-            result += traverse(s,i,i) + traverse(s,i,i+1)
-        return result
-
-
-        
+                self.output+=1
+            return (l+1,r-1)
+        for i in range( len(s) ):
+            # self.output+=1
+            # print('>>', s[i])
+            find_palin(i,i) # odd
+            find_palin(i,i+1) # even
+        return self.output
