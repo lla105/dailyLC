@@ -1,38 +1,48 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        dp = [ False ] * ( len(s) + 1)
-        dp[0] = True
-        for i in range(len(s)):
-            if not dp[i] : 
-                continue
-            for word in wordDict:
-                if s[i:i+len(word)] == word :
-                    dp[i+len(word)] = True
-        return dp[-1]
-        # dp = [ False ] * ( len(s) + 1 )
-        # dp[0] = True
-        # wordSet = set(wordDict)
+        cache = [ False ] * ( len(s)+1 )
+        # cache[-1] = True
+        self.output = False
+        def traverse(start_idx):
+            # print(f"traverse({start_idx})")
+            if start_idx == len(s):
+                # print(f" REACH BASE CASE")
+                self.output = True
+                return True
+            for i in range(len(wordDict)):
+                word = wordDict[i]
+                # print(f">> word: {word}")
+                if len(word)+start_idx > len(s):
+                    # print(f">>> 1")
+                    continue
+                if word != s[start_idx: start_idx+len(word)] :
+                    # print(f">>> {word} != {s[start_idx: start_idx+len(word)]}")
+                    continue
+                if cache[start_idx+len(word)] :
+                    # print(f">>> IN CACHE ALREADY {word} != {s[start_idx: start_idx+len(word)]}")
+                    continue
+                # print(f"MATCH: {word} == {s[start_idx: start_idx+len(word)]}")
+                cache[start_idx+len(word)] = True
+                # print(cache)
+                traverse(start_idx + len(word))
+        traverse(0)
+        return self.output
 
-        # def explore( index ) :
-        #     if index == len(s):
-        #         dp[index] = True
-        #     if index >= len(s):
-        #         print(' Over length ')
-        #         return
 
-        #     print(' >>>> explore (', index,'): ', s[index])
-        #     dp[index] = True
-        #     for word in wordDict:
-        #         if s[index:index+len(word)] != word or not dp[i] :
-        #             continue
-        #         print('3)  word: ', word, ' vs ', s[index:index+len(word)])
-        #         explore (index+len(word))
+#abcde, wordDict = [ab,cd,a,bcd]
+# cache_array = [f,t,t,f,t,f]
+#ab -> cd 
+#a -> bcd -> 
 
-        # for i in range(len(s)):
-        #     for word in wordDict:
-        #         if i+len(word) >= len(s) or s[i:i+len(word)] != word or not dp[i]:
-        #             continue
-        #         print('1) match: ', s[i:i+len(word)])
-        #         explore( i+len(word) )
-
-        # return dp[-1]
+#catsandog
+# base case: start_idx==len(s)
+# word = wordDict[i]
+#cats , [0:0+len(word)]
+#   and , [4:4+len(word)]
+#       og x
+#dog
+#sand
+#and
+#cat
+#   sand
+#       og x
